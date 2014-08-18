@@ -1,0 +1,12 @@
+﻿
+.signup-container 
+{
+    padding-top:50px;
+    padding-left:200px;
+    text-align: center;
+}
+
+tr.spaceUnder > td 
+{
+    padding-bottom: 20px;
+}
