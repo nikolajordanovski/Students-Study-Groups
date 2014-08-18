@@ -14,10 +14,13 @@
         <div class="header">
             <div class="header-top">
                 <ul class="ul-nav-top">
-                    <li><a href="Index.aspx"><asp:Image ID="imgLogo" CssClass="logo" ImageUrl="~/Images/ssg-logo.png"  runat="server" /></a></li>
-                    <li><asp:TextBox ID="TextBox1" CssClass="text-input" placeholder="Search.."  runat="server"></asp:TextBox></li>
+                    <li><a href="Index.aspx">
+                        <asp:Image ID="imgLogo" CssClass="logo" ImageUrl="~/Images/ssg-logo.png" runat="server" /></a></li>
+                    <li>
+                        <asp:TextBox ID="tbSearch" CssClass="text-input" placeholder="Search.." runat="server"></asp:TextBox></li>
+                    <li class="login-menu" style="margin-left: 500px;"><a href="#">Login</a></li>
+                    <li class="login-menu"><a href="SignUp.aspx">Sign up</a></li>
                 </ul>
-                
             </div>
             <div class="header-bottom">
                 <ul class="ul-nav-bottom">
@@ -27,15 +30,14 @@
                     <li><a href="#">Users</a></li>
                 </ul>
             </div>
-        </div>    
+        </div>
         <div class="main">
-            <asp:ContentPlaceHolder ID="MainContent" runat="server"/>
+            <asp:ContentPlaceHolder ID="MainContent" runat="server" />
         </div>
         <div class="clear">
         </div>
     </div>
     <div class="footer">
-        
     </div>
     </form>
 </body>
