@@ -11,7 +11,7 @@ namespace Students_Study_Groups
 {
 
 
-    public partial class About
+    public partial class Index
     {
     }
 }

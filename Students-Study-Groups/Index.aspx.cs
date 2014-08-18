@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace Students_Study_Groups
 {
-    public partial class _Default : System.Web.UI.Page
+    public partial class Index : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {

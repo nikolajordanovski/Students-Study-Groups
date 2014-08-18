@@ -88,45 +88,84 @@ first child of the left and right table columns */
 
 .page
 {
-    width: 960px;
+    width: 100%;
     background-color: #fff;
-    margin: 20px auto 0px auto;
-    border: 1px solid #496077;
 }
 
 .header
 {
-    position: relative;
-    margin: 0px;
+    position: fixed;
+    margin: 0 auto;
     padding: 0px;
-    background: #4b6c9e;
     width: 100%;
+    height: 90px;
+    top: 0;
+    z-index: 100;
 }
 
-.header h1
+.header-top 
 {
-    font-weight: 700;
-    margin: 0px;
-    padding: 0px 0px 0px 20px;
-    color: #f9f9f9;
-    border: none;
-    line-height: 2em;
-    font-size: 2em;
+    height: 45px;
+    background: #00B88A;
+    vertical-align: top;
+}
+
+.logo 
+{
+    height: 45px;
+    padding-left: 50px;
+}
+
+.header-bottom 
+{
+    height: 45px;
+    background: white;
+    box-shadow: 0px 2px 10px #888888;
+    font-size: 18px;
+}
+
+.ul-nav-top 
+{
+    list-style-type: none;
+    margin: 0;
+    height: 45px;
+}
+
+.ul-nav-top li 
+{
+    display: inline;
+}
+
+.ul-nav-bottom 
+{
+    list-style-type: none;
+    margin: 0;
+    padding: 10px;
+    text-align: center;
+}
+
+.ul-nav-bottom a 
+{
+    text-decoration: none;
+    color: #9D9D9D;
+}
+
+.ul-nav-bottom a:hover 
+{
+    color: #555555;
+}
+
+.ul-nav-bottom li 
+{
+    display: inline;
+    padding-right:10px;
 }
 
 .main
 {
     padding: 0px 12px;
-    margin: 12px 8px 8px 8px;
-    min-height: 420px;
-}
-
-.leftCol
-{
-    padding: 6px 0px;
-    margin: 12px 8px 8px 8px;
-    width: 200px;
-    min-height: 200px;
+    margin: 90px 8px 8px 8px;
+    min-height: 500px;
 }
 
 .footer
@@ -136,55 +175,6 @@ first child of the left and right table columns */
     margin: 0px auto;
     text-align: center;
     line-height: normal;
-}
-
-
-/* TAB MENU   
-----------------------------------------------------------*/
-
-div.hideSkiplink
-{
-    background-color:#3a4f63;
-    width:100%;
-}
-
-div.menu
-{
-    padding: 4px 0px 4px 8px;
-}
-
-div.menu ul
-{
-    list-style: none;
-    margin: 0px;
-    padding: 0px;
-    width: auto;
-}
-
-div.menu ul li a, div.menu ul li a:visited
-{
-    background-color: #465c71;
-    border: 1px #4e667d solid;
-    color: #dde4ec;
-    display: block;
-    line-height: 1.35em;
-    padding: 4px 20px;
-    text-decoration: none;
-    white-space: nowrap;
-}
-
-div.menu ul li a:hover
-{
-    background-color: #bfcbd6;
-    color: #465c71;
-    text-decoration: none;
-}
-
-div.menu ul li a:active
-{
-    background-color: #465c71;
-    color: #cfdbe6;
-    text-decoration: none;
 }
 
 /* FORM ELEMENTS   
@@ -202,16 +192,6 @@ fieldset p
     margin: 2px 12px 10px 10px;
 }
 
-fieldset.login label, fieldset.register label, fieldset.changePassword label
-{
-    display: block;
-}
-
-fieldset label.inline 
-{
-    display: inline;
-}
-
 legend 
 {
     font-size: 1.1em;
@@ -219,76 +199,37 @@ legend
     padding: 2px 4px 8px 4px;
 }
 
-input.textEntry 
+.header-top .text-input 
 {
-    width: 320px;
-    border: 1px solid #ccc;
+    margin-left:60px;
+}
+.text-input 
+{
+    padding: 8px;
+    border: solid 1px #dcdcdc;
+    transition: box-shadow 0.3s, border 0.3s;
+    width:200px;
+    /* border-radius */
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
 }
 
-input.passwordEntry 
+.text-input:focus 
 {
-    width: 320px;
-    border: 1px solid #ccc;
+    outline: none;
+    border: solid 1px #707070;
+    /* border-radius */
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+    /* box-shadow */
+    -webkit-box-shadow: rgba(0,0,0,0.8) 0px 0 10px;
+    -moz-box-shadow: rgba(0,0,0,0.8) 0 0 10px;
+    box-shadow: rgba(0,0,0,0.8) 0 0 10px;
 }
-
-div.accountInfo
-{
-    width: 42%;
-}
-
-/* MISC  
-----------------------------------------------------------*/
 
 .clear
 {
     clear: both;
-}
-
-.title
-{
-    display: block;
-    float: left;
-    text-align: left;
-    width: auto;
-}
-
-.loginDisplay
-{
-    font-size: 1.1em;
-    display: block;
-    text-align: right;
-    padding: 10px;
-    color: White;
-}
-
-.loginDisplay a:link
-{
-    color: white;
-}
-
-.loginDisplay a:visited
-{
-    color: white;
-}
-
-.loginDisplay a:hover
-{
-    color: white;
-}
-
-.failureNotification
-{
-    font-size: 1.2em;
-    color: Red;
-}
-
-.bold
-{
-    font-weight: bold;
-}
-
-.submitButton
-{
-    text-align: right;
-    padding-right: 10px;
 }
