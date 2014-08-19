@@ -50,6 +50,8 @@ namespace Students_Study_Groups
                         command.Parameters.AddWithValue("@Email", Email);
                         command.Parameters.AddWithValue("@Password", Password);
                         command.ExecuteNonQuery();
+
+                        ClientScript.RegisterStartupScript(GetType(), "Javascript", "javascript:popup(); ", true);
                     }
                     else 
                     {

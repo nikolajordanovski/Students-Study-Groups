@@ -4,6 +4,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head runat="server">
     <title>Student Study Groups</title>
+    <script src='<%= ResolveUrl("~/Scripts/jquery-1.11.1.min.js")%>' type="text/javascript"></script>
+    <script src='<%= ResolveUrl("~/Scripts/Site.js")%>' type="text/javascript"></script>
     <link href="~/Styles/Site.css" rel="stylesheet" type="text/css" />
     <asp:ContentPlaceHolder ID="HeadContent" runat="server">
     </asp:ContentPlaceHolder>
@@ -11,6 +13,34 @@
 <body>
     <form runat="server">
     <div class="page">
+        <asp:ScriptManager ID="ScriptManager1" runat="server">
+            <Services>
+                <asp:ServiceReference Path="~/Services/MainService.svc" />
+            </Services>
+        </asp:ScriptManager>
+        <div id="dialog-overlay">
+        </div>
+        <div id="login-dialog">
+            <div class="dialog-content">
+                <table>
+                    <tr>
+                        <td>Username:</td>
+                        <td><input type="text" class="text-input" id="tbUsernameLogin" placeholder="Username" /></td>
+                    </tr>
+                    <tr class="spaceUnder">
+                        <td>Password:</td>
+                        <td><input type="password" class="text-input" id="tbPasswordLogin" placeholder="Password" /></td>
+                    </tr>
+                    <tr class="spaceUnder">
+                        <td colspan="2"><a href="SignUp.aspx" class="signup-link">Don't have an account? Sign up here.</a></td>
+                    </tr>
+                    <tr>
+                        <td><a href="#" class="button-input" id="lbLogin">Login</a></td>
+                        <td><a href="#" class="button-input" id="lbCancel">Cancel</a></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
         <div class="header">
             <div class="header-top">
                 <ul class="ul-nav-top">
@@ -18,8 +48,8 @@
                         <asp:Image ID="imgLogo" CssClass="logo" ImageUrl="~/Images/ssg-logo.png" runat="server" /></a></li>
                     <li>
                         <asp:TextBox ID="tbSearch" CssClass="text-input" placeholder="Search.." runat="server"></asp:TextBox></li>
-                    <li class="login-menu" style="margin-left: 500px;"><a href="#">Login</a></li>
-                    <li class="login-menu"><a href="SignUp.aspx">Sign up</a></li>
+                    <li class="login-menu" style="margin-left: 500px;"><a href="javascript:popup()" id="login" runat="server">Login</a></li>
+                    <li class="login-menu"><a href="SignUp.aspx" id="signup" runat="server">Sign up</a></li>
                 </ul>
             </div>
             <div class="header-bottom">

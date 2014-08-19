@@ -4,10 +4,12 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Data.SqlClient;
+using System.Configuration;
 
 namespace Students_Study_Groups
 {
-    public partial class SiteMaster : System.Web.UI.MasterPage
+    public partial class AskQuestion : System.Web.UI.Page
     {
         public int UID;
 
@@ -15,9 +17,9 @@ namespace Students_Study_Groups
         {
             if (HttpContext.Current.Session["User"] != null)
             {
-                login.InnerText = "Logout";
-                login.HRef = "javascript:logout();";
+                UID = Int32.Parse(HttpContext.Current.Session["UID"].ToString());
             }
         }
+
     }
 }
