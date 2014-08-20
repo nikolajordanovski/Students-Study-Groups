@@ -65,9 +65,11 @@
     <Content Include="Scripts\AskQuestion.js" />
     <Content Include="Scripts\Index.js" />
     <Content Include="Scripts\jquery-1.11.1.min.js" />
+    <Content Include="Scripts\prettify.js" />
     <Content Include="Scripts\Profile.js" />
     <Content Include="Scripts\Question.js" />
     <Content Include="Scripts\Questions.js" />
+    <Content Include="Scripts\run_prettify.js" />
     <Content Include="Scripts\showdown.js" />
     <Content Include="Scripts\SignUp.js" />
     <Content Include="Scripts\Site.js" />
@@ -102,8 +104,9 @@
     <Compile Include="AskQuestion.aspx.designer.cs">
       <DependentUpon>AskQuestion.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Classes\Answer.cs" />
-    <Compile Include="Classes\Question.cs" />
+    <Compile Include="Classes\AnswerModel.cs" />
+    <Compile Include="Classes\QuestionModel.cs" />
+    <Compile Include="Classes\TagsModel.cs" />
     <Compile Include="Error.aspx.cs">
       <DependentUpon>Error.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

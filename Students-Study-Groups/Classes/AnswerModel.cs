@@ -7,8 +7,16 @@ using System.Configuration;
 
 namespace Students_Study_Groups.Classes
 {
-    class Answer
+    public class AnswerModel
     {
+        public class Comment
+        {
+            public int CID { get; set; }
+            public int UID { get; set; }
+            public string Text { get; set; }
+            public string DateCommented { get; set; }
+        }
+
         public int AID                  { get; set; }
         public int UID                  { get; set; }
         public string Title             { get; set; }
@@ -18,15 +26,7 @@ namespace Students_Study_Groups.Classes
         public string Body              { get; set; }
         public List<Comment> Comments   { get; set; }
 
-        public class Comment
-        {
-            public int CID              { get; set; }
-            public int UID              { get; set; }
-            public string Text          { get; set; }
-            public string DateCommented { get; set; }
-        }
-
-        public Answer(int id)
+        public AnswerModel(int id)
         {
             Comments = new List<Comment>();
             GetAnswerData(id);
@@ -70,7 +70,7 @@ namespace Students_Study_Groups.Classes
                     {
                         while (reader.Read())
                         {
-                            Comment c = new Comment();
+                            Comment c       = new Comment();
                             c.CID           = Int32.Parse(reader["CID"].ToString());
                             c.UID           = Int32.Parse(reader["UID"].ToString());
                             c.Text          = reader["Text"].ToString();

@@ -13,8 +13,8 @@ body
 
 p
 {
-    margin-bottom: 10px;
-    line-height: 1.6em;
+    margin-bottom: 5px;
+    line-height: 1.0em;
     margin-left: 10px;
 }
 
@@ -300,4 +300,14 @@ first child of the left and right table columns */
 tr.spaceUnder > td 
 {
     padding-bottom: 20px;
+}
+
+.float-left 
+{
+    float:left;
+}
+
+.float-right 
+{
+    float:right;
 }

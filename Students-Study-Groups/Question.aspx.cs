@@ -6,13 +6,14 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data.SqlClient;
 using System.Configuration;
+using Students_Study_Groups.Classes;
 
 namespace Students_Study_Groups
 {
     public partial class Question : System.Web.UI.Page
     {
         public int QID;
-        public Question Question;
+        public QuestionModel QuestionMod;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -24,32 +25,13 @@ namespace Students_Study_Groups
             }
             else if(!IsPostBack)
             {
-
-            }
-        }
-
-        public void FillQuestion()
-        {
-            using (SqlConnection conn = new SqlConnection())
-            {
-                conn.ConnectionString = ConfigurationManager.ConnectionStrings["SSG"].ConnectionString;
-                try
+                QuestionMod = QuestionModel.GetQuestionData(QID);
+                if (QuestionMod == null)
                 {
-                    conn.Open();
-                    SqlCommand command = new SqlCommand();
-                    SqlDataReader reader;
-                    command.Connection = conn;
-
-
-                }
-                catch (Exception e)
-                {
-                }
-                finally
-                {
-                    conn.Close();
+                    Response.Redirect("Error.aspx");
                 }
             }
         }
+
     }
 }
