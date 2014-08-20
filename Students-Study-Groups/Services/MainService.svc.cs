@@ -148,7 +148,7 @@ namespace Students_Study_Groups.Services
                     //---------------------------------------------------------------------------------
 
                     result["status"] = "success";
-                    result["message"] = "The question has been asked!";
+                    result["QID"] = QID;
                     return new JavaScriptSerializer().Serialize(result);
                 }
                 catch (Exception e)

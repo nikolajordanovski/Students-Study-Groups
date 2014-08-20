@@ -18,7 +18,7 @@ body
 #wmd-button-bar 
 {
 	width: 100%;
-	background-color: Silver; 
+	background-color: White; 
 }
 
 #wmd-input 
@@ -38,7 +38,7 @@ body
 	border: 2px dashed grey;
 	min-height:10px;
 }
-
+;
 #wmd-output 
 { 
 	background-color: Pink;

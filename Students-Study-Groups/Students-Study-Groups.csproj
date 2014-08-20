@@ -55,15 +55,18 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AskQuestion.aspx" />
+    <Content Include="Error.aspx" />
     <Content Include="Images\ssg-logo.png" />
     <Content Include="Images\wmd-buttons.png" />
     <Content Include="Index.aspx" />
     <Content Include="Profile.aspx" />
+    <Content Include="Question.aspx" />
     <Content Include="Questions.aspx" />
     <Content Include="Scripts\AskQuestion.js" />
     <Content Include="Scripts\Index.js" />
     <Content Include="Scripts\jquery-1.11.1.min.js" />
     <Content Include="Scripts\Profile.js" />
+    <Content Include="Scripts\Question.js" />
     <Content Include="Scripts\Questions.js" />
     <Content Include="Scripts\showdown.js" />
     <Content Include="Scripts\SignUp.js" />
@@ -74,7 +77,9 @@
     <Content Include="SignUp.aspx" />
     <Content Include="Styles\AskQuestion.css" />
     <Content Include="Styles\Index.css" />
+    <Content Include="Styles\prettify.css" />
     <Content Include="Styles\Profile.css" />
+    <Content Include="Styles\Question.css" />
     <Content Include="Styles\Questions.css" />
     <Content Include="Styles\SignUp.css" />
     <Content Include="Styles\Site.css" />
@@ -97,6 +102,15 @@
     <Compile Include="AskQuestion.aspx.designer.cs">
       <DependentUpon>AskQuestion.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Classes\Answer.cs" />
+    <Compile Include="Classes\Question.cs" />
+    <Compile Include="Error.aspx.cs">
+      <DependentUpon>Error.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Error.aspx.designer.cs">
+      <DependentUpon>Error.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -115,6 +129,13 @@
       <DependentUpon>Profile.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Question.aspx.cs">
+      <DependentUpon>Question.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Question.aspx.designer.cs">
+      <DependentUpon>Question.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Questions.aspx.cs">
       <DependentUpon>Questions.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
