@@ -65,11 +65,9 @@
     <Content Include="Scripts\AskQuestion.js" />
     <Content Include="Scripts\Index.js" />
     <Content Include="Scripts\jquery-1.11.1.min.js" />
-    <Content Include="Scripts\prettify.js" />
     <Content Include="Scripts\Profile.js" />
     <Content Include="Scripts\Question.js" />
     <Content Include="Scripts\Questions.js" />
-    <Content Include="Scripts\run_prettify.js" />
     <Content Include="Scripts\showdown.js" />
     <Content Include="Scripts\SignUp.js" />
     <Content Include="Scripts\Site.js" />

@@ -21,17 +21,22 @@
             <div class="question-votes">
                 
             </div>
-            <div class="question-body">
+            <div class="question-body" runat="server" id="QuestionBody">
                 <%=QuestionMod.Body %>
-                <div class="question-tags">
-                    
+                <div>
+                    <div class="question-tags" style="display:inline">
+                        <div class="tag">Tag1</div>
+                        <div class="tag">Tag2</div>
+                        <div class="tag">Tag3</div>
+                    </div>
+                    <div style="float:right;">Asked by: Fico</div>
                 </div>
                 <hr />
                 <div class="question-comments">
-                    
+                    <a href="javascript:void(0)" id="add-comment" class="button-comment">add comment</a>
+
                 </div>
             </div>
-            
         </div>
     </div>
 </asp:Content>

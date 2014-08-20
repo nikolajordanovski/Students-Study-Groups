@@ -23,3 +23,45 @@
     width: 90%;
     float: left;
 }
+
+.question-tags 
+{
+    padding-top: 10px;
+}
+.tag
+{
+    clear: both;
+    display: inline;
+    overflow: hidden;
+    height: auto;
+    padding: 1px 3px;
+    background: #00B88A;
+    cursor: default;
+    color: white;
+    border-radius: 3px;
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+.question-comments 
+{
+    margin-top:10px;
+}
+
+.button-comment 
+{
+    text-decoration: none;
+    background: #888888;
+    color: White;
+    width: 100px;
+    padding: 4px 10px;
+}
+
+.button-comment:hover 
+{
+    text-decoration: none;
+    background: #555555;
+    color: White;
+    width: 100px;
+    padding: 4px 10px;
+}

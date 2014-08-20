@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using System.Data.SqlClient;
 using System.Configuration;
 using Students_Study_Groups.Classes;
+using System.Text;
 
 namespace Students_Study_Groups
 {
@@ -19,17 +20,33 @@ namespace Students_Study_Groups
         {
             string id = Request.QueryString["QID"];
 
+            //Show error page if the query string is empty or not integer
             if (string.IsNullOrEmpty(id) || !Int32.TryParse(id, out QID))
             {
                 Response.Redirect("Error.aspx");
             }
-            else if(!IsPostBack)
-            {
+            
+            if(!IsPostBack)
+            { 
                 QuestionMod = QuestionModel.GetQuestionData(QID);
                 if (QuestionMod == null)
                 {
                     Response.Redirect("Error.aspx");
                 }
+
+                /*
+                //Add the question text, tags and comments---------------------------- 
+                StringBuilder innerHtml = new StringBuilder();
+                innerHtml.Append(QuestionMod.Body);
+                innerHtml.Append("<div class='question-tags'>");
+                foreach (TagsModel Tag in QuestionMod.Tags)
+                {
+                    innerHtml.Append("<div class='tag'>" + Tag.Name + "</div>");
+                }
+
+                QuestionBody.InnerHtml = innerHtml.ToString();
+                //--------------------------------------------------------------------
+                */
             }
         }
 
