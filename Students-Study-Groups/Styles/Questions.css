@@ -1,2 +1,75 @@
-﻿body {
+﻿#container 
+{
+    width:65%;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+#questions
+{
+    width: 80%;
+}
+
+.question
+{
+    width: 100%;
+    height: 120px;
+    border-top: 3px solid #00B88A;
+    margin-bottom: 10px;
+}
+
+.left
+{
+    float: left;
+    width: 15%;
+    height: 90%;
+    margin-top: 5px;
+    margin-left: 5px;
+    background: #00B88A;
+    border-radius: 3px;
+}
+
+.right
+{
+    float: right;
+    width: 80%;
+    height: 100%;
+}
+
+.title 
+{
+    width: 100%;
+    font-size: 1.8em;
+    margin-bottom: 5px;
+}
+
+.description
+{
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+.tags
+{
+    width: 100%;
+}
+
+.tag
+{
+    clear: both;
+    display: inline;
+    overflow: hidden;
+    height: auto;
+    padding: 1px 3px;
+    background: #00B88A;
+    cursor: default;
+    color: white;
+    border-radius: 3px;
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+#popularTags 
+{
+    width: 20%; 
 }
