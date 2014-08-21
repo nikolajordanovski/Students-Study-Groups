@@ -1,4 +1,58 @@
-﻿.questions
+﻿.subheader
+{
+    width: 100%;
+    height: 40px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #00B88A;
+}
+
+.questionsname
+{
+    float:left;
+    width: 25%;
+    height: 100%;
+    font-size: 1.8em;
+    padding-top: 10px;
+    padding-left: 10px;
+}
+
+.sortmenu
+{
+    float:left;
+    width: 50%;
+    height: 100%;
+    font-size: 1.8em;
+}
+
+.askquestion
+{
+    text-align: right;
+    float:left;
+    width: 23%;
+    height: 100%;
+    font-size: 1.8em;
+}
+
+.button-input2
+{
+    font-size: 18px;
+    text-decoration: none;
+    background: #00B88A;
+    color: White;
+    padding: 5px 15px;
+    border-radius: 10px;
+}
+
+.button-input2:hover, .button-link2:focus {
+    font-size: 18px;
+    text-decoration: none;
+    background: #008161;
+    color: White;
+    padding: 5px 15px;
+    border-radius: 10px;
+}
+
+.questions
 {
     float: left;
     width: 75%;

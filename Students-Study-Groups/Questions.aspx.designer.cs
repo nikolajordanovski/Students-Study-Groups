@@ -13,6 +13,42 @@ namespace Students_Study_Groups {
     public partial class Questions {
         
         /// <summary>
+        /// lbNewest control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lbNewest;
+        
+        /// <summary>
+        /// lbVotes control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lbVotes;
+        
+        /// <summary>
+        /// lbViews control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lbViews;
+        
+        /// <summary>
+        /// lbUnanswered control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lbUnanswered;
+        
+        /// <summary>
         /// questions control.
         /// </summary>
         /// <remarks>
