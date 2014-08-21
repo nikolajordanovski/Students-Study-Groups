@@ -1,10 +1,10 @@
 ﻿.subject
 {
-    border-top: 10px solid #00B88A;
+    border: 2px solid #00B88A;
+    border-top: 12px solid #00B88A;
     clear: both;
     width: 160px;
     height: 200px;
-    background: grey;
     margin: 0px 6px 20px 0px;
     padding-top: 10px;
     text-align: center;
@@ -13,6 +13,8 @@
 div.subject:hover  
 {
     cursor:pointer;
+    background-color: #00B88A;
+    transition: background-color 1000ms linear;
 }
 
 .name

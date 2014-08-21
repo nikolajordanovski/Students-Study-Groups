@@ -17,17 +17,22 @@ namespace Students_Study_Groups
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
+            {
+                Session["order"] = "ORDER BY DateAsked DESC";
                 pullQuestions();
+            }
         }
 
         protected void pullQuestions()
         {
+            questions.InnerHtml = "";
+
             SqlConnection connection = new SqlConnection();
             connection.ConnectionString = ConfigurationManager.ConnectionStrings["SSG"].ConnectionString;
 
             SqlCommand command = new SqlCommand();
             command.Connection = connection;
-            command.CommandText = "SELECT QID FROM Questions";
+            command.CommandText = "SELECT QID FROM Questions " + Session["order"];
             SqlDataReader reader;
 
             try
@@ -35,11 +40,7 @@ namespace Students_Study_Groups
                 connection.Open();
                 reader = command.ExecuteReader();
                 while (reader.Read())
-                {
                     questions.InnerHtml += generateDivQuestion(reader.GetInt32(0));
-                    questions.InnerHtml += generateDivQuestion(reader.GetInt32(0));
-                    questions.InnerHtml += generateDivQuestion(reader.GetInt32(0));
-                }
             }
             catch {}
             finally
@@ -84,6 +85,30 @@ namespace Students_Study_Groups
             questionDiv.Append("</div>");
 
             return questionDiv.ToString();
+        }
+
+        protected void lbNewest_Click(object sender, EventArgs e)
+        {
+            Session["order"] = "ORDER BY DateAsked DESC";
+            pullQuestions();
+        }
+
+        protected void lbVotes_Click(object sender, EventArgs e)
+        {
+            Session["order"] = "ORDER BY Votes DESC";
+            pullQuestions();
+        }
+
+        protected void lbViews_Click(object sender, EventArgs e)
+        {
+            Session["order"] = "ORDER BY Views DESC";
+            pullQuestions();
+        }
+
+        protected void lbUnanswered_Click(object sender, EventArgs e)
+        {
+            Session["order"] = "WHERE QID NOT IN (SELECT QID FROM Answers) ORDER BY Questions.DateAsked DESC";
+            pullQuestions();
         }
     }
 }

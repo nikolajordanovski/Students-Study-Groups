@@ -2,13 +2,14 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
     <link href="Styles/Index.css" type="text/css" rel="stylesheet" />
     <script src='<%= ResolveUrl("~/Scripts/Index.js")%>' type="text/javascript"></script>
+    <script src='<%= ResolveUrl("~/Scripts/jquery-1.11.1.min.js")%>' type="text/javascript"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 
     <table>
         <tr>
             <td>
-                <div class="subject">
+                <div id="subject" class="subject">
                     <div class="name">Probability and Statistics</div>
                     <div class="views">231 views</div>
                     <div class="questions">124 questions</div>
