@@ -1,1 +1,32 @@
-﻿
+﻿.subject
+{
+    border-top: 10px solid #00B88A;
+    clear: both;
+    width: 160px;
+    height: 200px;
+    background: grey;
+    margin: 0px 6px 20px 0px;
+    padding-top: 10px;
+    text-align: center;
+}
+
+div.subject:hover  
+{
+    cursor:pointer;
+}
+
+.name
+{
+    font-size: 2em;
+    margin-bottom: 30px;
+}
+
+.views
+{
+    font-size: 1.6em;
+}
+
+.questions
+{
+    font-size: 1.6em;
+}

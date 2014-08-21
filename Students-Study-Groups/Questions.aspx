@@ -6,13 +6,10 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 
-<div id="container">
-
     <div ID="questions" class="questions" runat="server">
     </div>
 
     <div class="popularTags">
     </div>
-</div>
 
 </asp:Content>
