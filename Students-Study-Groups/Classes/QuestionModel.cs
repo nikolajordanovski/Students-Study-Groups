@@ -19,6 +19,7 @@ namespace Students_Study_Groups.Classes
 
         public int QID                   { get; set; }
         public int UID                   { get; set; }
+        public string Username { get; set; }
         public string Title              { get; set; }
         public int Views                 { get; set; }
         public int Votes                 { get; set; }
@@ -41,8 +42,8 @@ namespace Students_Study_Groups.Classes
                     SqlDataReader reader;
                     SqlCommand command = new SqlCommand();
                     command.Connection = conn;
-
-                    command.CommandText = "SELECT * FROM Questions WHERE QID = @QID";
+                    //command.CommandText = "SELECT * FROM Questions WHERE QID = @QID";
+                    command.CommandText = "SELECT * FROM Questions INNER JOIN Users ON Questions.UID = Users.UID WHERE QID = @QID";
                     command.Parameters.AddWithValue("@QID", qid);
                     reader = command.ExecuteReader();
 
@@ -57,6 +58,7 @@ namespace Students_Study_Groups.Classes
                         reader.Read();
                         question.QID        = Int32.Parse(reader["QID"].ToString());
                         question.UID        = Int32.Parse(reader["UID"].ToString());
+                        question.Username   = reader["username"].ToString();
                         question.Votes      = Int32.Parse(reader["Votes"].ToString());
                         question.Views      = Int32.Parse(reader["Views"].ToString());
                         question.Title      = reader["Title"].ToString();

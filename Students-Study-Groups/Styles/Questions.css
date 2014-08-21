@@ -1,20 +1,19 @@
 ﻿#container 
 {
-    width:65%;
-    margin: 0 auto;
-    padding: 20px;
+    width: 100%;
 }
 
-#questions
+.questions
 {
-    width: 80%;
+    float: left;
+    width: 75%;
 }
 
 .question
 {
     width: 100%;
     height: 120px;
-    border-top: 3px solid #00B88A;
+    border-top: 2px solid #00B88A;
     margin-bottom: 10px;
 }
 
@@ -26,7 +25,8 @@
     margin-top: 5px;
     margin-left: 5px;
     background: #00B88A;
-    border-radius: 3px;
+    color: White;
+    font-size: 1.2em;
 }
 
 .right
@@ -41,6 +41,15 @@
     width: 100%;
     font-size: 1.8em;
     margin-bottom: 5px;
+    
+}
+
+div.title a { color: inherit; text-decoration: none;} 
+
+div.title a:hover  
+{
+    cursor:pointer;
+    text-decoration: underline;
 }
 
 .description
@@ -49,27 +58,55 @@
     margin-bottom: 5px;
 }
 
+.about 
+{
+    clear: both;
+    margin-top: 20px;
+    width: 100%;
+}
+
 .tags
 {
-    width: 100%;
+    float:left;
 }
 
 .tag
 {
     clear: both;
     display: inline;
+    margin-right: 5px;
     overflow: hidden;
-    height: auto;
-    padding: 1px 3px;
+    padding: 2px 5px 2px 5px;;
     background: #00B88A;
-    cursor: default;
     color: white;
     border-radius: 3px;
     font-size: 14px;
-    white-space: nowrap;
 }
 
-#popularTags 
+div.tag:hover 
 {
-    width: 20%; 
+    cursor:pointer;
+    background: #58C6AB
+}
+
+.profile
+{
+    float:right;
+    margin: 5px 2px 0px 0px;
+}
+
+div.profile a { color: inherit; text-decoration: none;} 
+
+div.profile a:hover  
+{
+    cursor:pointer;
+    text-decoration: underline;
+}
+
+.popularTags 
+{
+    float: right;
+    width: 23%; 
+    height: 600px;
+    background: #F5D0A9;
 }

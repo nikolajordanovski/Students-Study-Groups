@@ -164,9 +164,11 @@ first child of the left and right table columns */
 
 .main
 {
-    padding: 0px 12px;
-    margin: 90px 8px 8px 8px;
-    min-height: 500px;
+    width: 1000px;
+    margin: 0px auto;
+    margin-top: 90px;
+    padding-top: 10px;
+    min-height: 600px;
 }
 
 .footer

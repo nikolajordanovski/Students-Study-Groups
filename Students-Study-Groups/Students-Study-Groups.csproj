@@ -103,6 +103,7 @@
       <DependentUpon>AskQuestion.aspx</DependentUpon>
     </Compile>
     <Compile Include="Classes\AnswerModel.cs" />
+    <Compile Include="Classes\HtmlRemoval.cs" />
     <Compile Include="Classes\QuestionModel.cs" />
     <Compile Include="Classes\TagsModel.cs" />
     <Compile Include="Error.aspx.cs">

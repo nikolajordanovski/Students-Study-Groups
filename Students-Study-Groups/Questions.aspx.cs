@@ -7,6 +7,8 @@ using System.Web.UI.WebControls;
 using System.Data.SqlClient;
 using System.Configuration;
 using System.Data;
+using System.Text;
+using Students_Study_Groups.Classes;
 
 namespace Students_Study_Groups
 {
@@ -25,60 +27,63 @@ namespace Students_Study_Groups
 
             SqlCommand command = new SqlCommand();
             command.Connection = connection;
-            command.CommandText = "SELECT * FROM Questions";
-
+            command.CommandText = "SELECT QID FROM Questions";
             SqlDataReader reader;
 
             try
             {
                 connection.Open();
                 reader = command.ExecuteReader();
-
-                while(reader.Read())
+                while (reader.Read())
                 {
-                    string title = reader[2].ToString();
-                    string body = reader[3].ToString();
-                    string votes = reader[4].ToString();
-                    string views = reader[5].ToString();
+                    questions.InnerHtml += generateDivQuestion(reader.GetInt32(0));
+                    questions.InnerHtml += generateDivQuestion(reader.GetInt32(0));
+                    questions.InnerHtml += generateDivQuestion(reader.GetInt32(0));
                 }
             }
-            catch (Exception ex)
-            {
-                Label lblError = (Label)Master.FindControl("lblError");
-                lblError.Text = ex.Message;
-            }
+            catch {}
             finally
             {
                 connection.Close();
             }
         }
 
-        protected void generateDivQuestion(string title, string body, string votes, string views)
+        protected string generateDivQuestion(int qid)
         {
-            string questionDiv = "";
-            
-            questionDiv += "<div class='question'>";
-            questionDiv += "<div class='left'>";
-            questionDiv += "<div>" + votes + "</div>";
-            questionDiv += "<div>Votes</div>";
-            questionDiv += "<div>" + views + "</div>";
-            questionDiv += "<div>Answers</div>";
-            questionDiv += "</div>";
-            questionDiv += "<div class='right'>";
-            questionDiv += "<div class='title'>";
-            questionDiv += title;
-            questionDiv += "</div>";
-            questionDiv += "<div class='description'>";
-            questionDiv += body;
-            questionDiv += "</div>";
-            questionDiv += "<div class='tags'>";
-            questionDiv += "<div class='tag'>Java</div>";
-            questionDiv += "<div class='tag'>JSON</div>";
-            questionDiv += "<div class='tag'>Android</div>";
-            questionDiv += "<div class='tag'>GitHub</div>";
-            questionDiv += "</div>";
-            questionDiv += "</div>";
-            questionDiv += "</div>";
+            QuestionModel question = QuestionModel.GetQuestionData(qid);
+
+            StringBuilder questionDiv = new StringBuilder();
+            string description = HtmlRemoval.StripTagsRegex(question.Body);
+
+            questionDiv.Append("<div class='question'>");
+            questionDiv.Append("<div class='left'>");
+            questionDiv.Append("<table><tr><td>Votes:</td><td>" + question.Votes + "</td></tr>");
+            questionDiv.Append("<tr><td>Views:</td><td>" + question.Views + "</td></tr>");
+            questionDiv.Append("<tr><td>Answers:</td><td>" + question.Answers.Count + "</td></tr></table>");
+            questionDiv.Append("</div>");
+            questionDiv.Append("<div class='right'>");
+            questionDiv.Append("<div class='title'><a href='Question.aspx?QID=" + qid + "'>");
+            questionDiv.Append(question.Title);
+            questionDiv.Append("</a></div>");
+            questionDiv.Append("<div class='description'>");
+            if(description.Length > 200)
+                questionDiv.Append(description.Substring(0, 195) + "...");
+            else
+                questionDiv.Append(description);
+            questionDiv.Append("</div>");
+            questionDiv.Append("<div class='about'>");
+            questionDiv.Append("<div class='tags'>");
+            foreach(TagsModel tag in question.Tags)
+            questionDiv.Append("<div class='tag'>" + tag.Name.Trim() + "</div>");
+            questionDiv.Append("</div>");
+            questionDiv.Append("<div class='profile'>");
+            questionDiv.Append("Asked by: <a href='Profile.aspx?UID=" + question.UID + "'><b>" + question.Username + "</b></a> on <b>" + DateTime.Parse(question.DateAsked).ToShortDateString() + "</b>");
+            questionDiv.Append("</div>");
+            questionDiv.Append("</div>");
+            questionDiv.Append("</div>");
+            questionDiv.Append("</div>");
+
+            return questionDiv.ToString();
         }
     }
 }
