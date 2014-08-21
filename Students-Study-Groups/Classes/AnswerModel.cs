@@ -21,7 +21,6 @@ namespace Students_Study_Groups.Classes
         public int AID                  { get; set; }
         public int UID                  { get; set; }
         public string Username          { get; set; }
-        public string Title             { get; set; }
         public int Correct              { get; set; }
         public int Votes                { get; set; }
         public string DateAnswered      { get; set; }
@@ -46,10 +45,10 @@ namespace Students_Study_Groups.Classes
                     SqlCommand command = new SqlCommand();
                     command.Connection = conn;
 
-                    command.CommandText = "SELECT * FROM Answers INNER JOIN Users ON Answers.UID = Users.UID WHERE AID = @AID";
+                    command.CommandText = "SELECT * FROM Answers INNER JOIN Users ON Answers.UID = Users.UID WHERE Answers.AID = @AID";
                     command.Parameters.AddWithValue("@AID", id);
                     reader = command.ExecuteReader();
-
+                    
                     if (reader.HasRows)
                     {
                         while(reader.Read()) 
@@ -58,7 +57,6 @@ namespace Students_Study_Groups.Classes
                             UID          = Int32.Parse(reader["UID"].ToString());
                             Correct      = Int32.Parse(reader["Correct"].ToString());
                             Votes        = Int32.Parse(reader["Votes"].ToString());
-                            Title        = reader["Title"].ToString();
                             Body         = reader["Body"].ToString();
                             DateAnswered = reader["DateAnswered"].ToString();
                             Username     = reader["Username"].ToString();

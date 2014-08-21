@@ -56,7 +56,11 @@
   <ItemGroup>
     <Content Include="AskQuestion.aspx" />
     <Content Include="Error.aspx" />
+    <Content Include="Images\downvote-arrow-voted.png" />
+    <Content Include="Images\downvote-arrow.png" />
     <Content Include="Images\ssg-logo.png" />
+    <Content Include="Images\upvote-arrow-voted.png" />
+    <Content Include="Images\upvote-arrow.png" />
     <Content Include="Images\wmd-buttons.png" />
     <Content Include="Index.aspx" />
     <Content Include="Profile.aspx" />

@@ -6,13 +6,12 @@
     <link href="Styles/prettify.css" type="text/css" rel="stylesheet" />
     <link href="Styles/wmd.css" type="text/css" rel="stylesheet" />
     <script src='<%= ResolveUrl("~/Scripts/Question.js")%>' type="text/javascript"></script>
-    <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"
-        type="text/javascript"></script>
+    <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js" type="text/javascript"></script>
     <script src='<%= ResolveUrl("~/Scripts/showdown.js")%>' type="text/javascript"></script>
     <script src='<%= ResolveUrl("~/Scripts/wmd.js")%>' type="text/javascript"></script>
     <script type="text/javascript">
         var userId     = <%=UID %>;
-        var questionId = <%=QID %>
+        var questionId = <%=QID %>;
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -34,6 +33,11 @@
         <!-- QUESTION -->
         <div class="question-content">
             <div class="question-votes">
+                <asp:ImageButton ID="imgUpvote" ImageUrl="~/Images/upvote-arrow.png" runat="server" />
+                <div class="votes">
+                    <asp:Label ID="lblVotes" runat="server" Text="2"></asp:Label>
+                </div>
+                <asp:ImageButton ID="ImageButton1" ImageUrl="~/Images/downvote-arrow.png" runat="server" />
             </div>
             <div class="question-body" runat="server" id="QuestionBody"></div>
         </div>

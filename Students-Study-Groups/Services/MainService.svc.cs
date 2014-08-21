@@ -180,7 +180,9 @@ namespace Students_Study_Groups.Services
                     SqlDataReader reader;
                     command.Connection = conn;
 
-                    command.CommandText = "SELECT * FROM QuestionComments WHERE QID = @QID AND UID = @UID AND DateCommented = GETDATE()";
+                    command.CommandText = "SELECT * FROM QuestionComments WHERE QID = @QID AND UID = @UID " +
+                                          "AND DateCommented = GETDATE()";
+
                     command.Parameters.AddWithValue("@QID", jsonData["questionId"]);
                     command.Parameters.AddWithValue("@UID", jsonData["userId"]);
                     reader = command.ExecuteReader();
@@ -194,7 +196,9 @@ namespace Students_Study_Groups.Services
                     else
                     {
                         reader.Close();
-                        command.CommandText = "INSERT INTO QuestionComments (QID, UID, Text, DateCommented) VALUES (@QID, @UID, @Text, GETDATE());";
+                        command.CommandText = "INSERT INTO QuestionComments (QID, UID, Text, DateCommented) " +
+                                              "VALUES (@QID, @UID, @Text, GETDATE());";
+
                         command.Parameters.AddWithValue("@Text", jsonData["text"]);
                         command.ExecuteNonQuery();
 
@@ -216,6 +220,100 @@ namespace Students_Study_Groups.Services
             }
         }
 
+        [OperationContract]
+        public string PostAnswer(string answerData)
+        {
+            Dictionary<string, object> jsonData = new JavaScriptSerializer().Deserialize<Dictionary<string, object>>(answerData);
+            Dictionary<string, string> result = new Dictionary<string, string>();
 
+            using (SqlConnection conn = new SqlConnection()) 
+            {
+                conn.ConnectionString = ConfigurationManager.ConnectionStrings["SSG"].ConnectionString;
+                try
+                {
+                    conn.Open();
+                    SqlCommand command = new SqlCommand();
+                    command.Connection = conn;
+
+                    command.CommandText = "INSERT INTO Answers (QID, UID, Body, Votes, Correct, DateAnswered)" +
+                                          "VALUES (@QID, @UID, @Body, 0, 0, GETDATE()); SELECT SCOPE_IDENTITY()";
+                    
+                    command.Parameters.AddWithValue("@QID", jsonData["questionId"]);
+                    command.Parameters.AddWithValue("@UID", jsonData["userId"]);
+                    command.Parameters.AddWithValue("@Body", jsonData["text"]);
+                    
+                    result["status"] = "success";
+                    result["AID"]    = command.ExecuteScalar().ToString();
+
+                    return new JavaScriptSerializer().Serialize(result);
+                }
+                catch (Exception e)
+                {
+                    result["status"] = "error";
+                    result["message"] = e.Message;
+                    return new JavaScriptSerializer().Serialize(result);
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
+        }
+
+        [OperationContract]
+        public string PostAnswerComment(string postData)
+        {
+            Dictionary<string, object> jsonData = new JavaScriptSerializer().Deserialize<Dictionary<string, object>>(postData);
+            Dictionary<string, string> result = new Dictionary<string, string>();
+
+            using (SqlConnection conn = new SqlConnection())
+            {
+                conn.ConnectionString = ConfigurationManager.ConnectionStrings["SSG"].ConnectionString;
+                try
+                {
+                    conn.Open();
+                    SqlCommand command = new SqlCommand();
+                    SqlDataReader reader;
+                    command.Connection = conn;
+
+                    command.CommandText = "SELECT * FROM AnswerComments WHERE AID = @AID AND UID = @UID " +
+                                          "AND DateCommented = GETDATE()";
+
+                    command.Parameters.AddWithValue("@AID", jsonData["answerId"]);
+                    command.Parameters.AddWithValue("@UID", jsonData["userId"]);
+                    reader = command.ExecuteReader();
+                    if (reader.HasRows)
+                    {
+                        reader.Close();
+                        result["status"] = "error";
+                        result["message"] = "Please don't spam";
+                        return new JavaScriptSerializer().Serialize(result);
+                    }
+                    else
+                    {
+                        reader.Close();
+                        command.CommandText = "INSERT INTO AnswerComments (AID, UID, Text, DateCommented) " +
+                                              "VALUES (@AID, @UID, @Text, GETDATE());";
+
+                        command.Parameters.AddWithValue("@Text", jsonData["text"]);
+                        command.ExecuteNonQuery();
+
+                        result["status"] = "success";
+                        result["message"] = "";
+                        return new JavaScriptSerializer().Serialize(result);
+                    }
+                }
+                catch (Exception e)
+                {
+                    result["status"] = "error";
+                    result["message"] = e.Message;
+                    return new JavaScriptSerializer().Serialize(result);
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
+        }
     }
 }

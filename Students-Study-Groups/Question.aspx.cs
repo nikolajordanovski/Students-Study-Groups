@@ -60,7 +60,7 @@ namespace Students_Study_Groups
                 innerHtml.Append("      <div class='tag'><a href='#'>" + Tag.Name + "</a></div>");
             }
             innerHtml.Append("      </div>");
-            innerHtml.Append("      <div style='float:right;'>Asked by: " + QuestionMod.Username + "</div>");
+            innerHtml.Append("      <div style='float:right;'>Asked by: <a href='Profile.aspx?UID="+ QuestionMod.UID +"'>" + QuestionMod.Username + "</a></div>");
             innerHtml.Append("  </div>");
             innerHtml.Append("</div>");
             innerHtml.Append("<div class='question-comments'>");
@@ -79,7 +79,7 @@ namespace Students_Study_Groups
                 {
                     innerHtml.Append("<div class='comment'>");
                     innerHtml.Append("  <span>" + c.Text + "</span>");
-                    innerHtml.Append("  <span>--</span><a href='#'>" + c.Username + "</a>");
+                    innerHtml.Append("  <span>--</span><a href='Profile.aspx?UID="+ c.UID +"'>" + c.Username + "</a>");
                     innerHtml.Append("</div>");
                 }
                 innerHtml.Append("</div>");
@@ -104,31 +104,34 @@ namespace Students_Study_Groups
                 innerHtml.Append("  <div class='answer-body'>");
                 innerHtml.Append("      <div class='body-content'>");
                 innerHtml.Append(answer.Body);
-                innerHtml.Append("          <div style='float:right;display:inline;'>Posted by: " + answer.Username + "</div>");
+                innerHtml.Append("          <div style='float:right;display:inline;'>Posted by: <a href='Profile.aspx?UID="+ answer.UID +"'>" + answer.Username + "</a></div>");
                 innerHtml.Append("      </div>");
-                innerHtml.Append("      <div class='answer-comments>'");
-                innerHtml.Append("  <a href='javascript:void(0)' id='add_answer_comment_"+ answer.UID + "' class='button-comment float-left' style='margin-right: 10px;'>add comment</a>");
-                innerHtml.Append("  <div class='answer-post-comment' style='display:none;'>");
-                innerHtml.Append("      <textarea id='ta_answer_comment_"+ answer.UID + "' class='textarea-input'></textarea>");
-                innerHtml.Append("      <a href='javascript:void(0)' id='post_answer_comment_" + answer.UID +"' class='button-comment float-right' style='margin-right: 10px; width: 30px !important;'>post</a>");
-                innerHtml.Append("  </div>");
+                innerHtml.Append("      <div class='answer-comments'>");
+                innerHtml.Append("          <a href='javascript:void(0)' id='add_answer_comment_"+ answer.AID + "' class='button-comment float-left' style='margin-right: 10px;'>add comment</a>");
+                innerHtml.Append("          <div id='answer_post_comment_" + answer.AID + "' class='question-post-comment' style='display:none;'>");
+                innerHtml.Append("              <textarea id='ta_answer_comment_"+ answer.AID + "' class='textarea-input'></textarea>");
+                innerHtml.Append("              <a href='javascript:void(0)' id='post_answer_comment_" + answer.AID +"' class='button-comment float-right' style='margin-right: 10px; width: 30px !important;'>post</a>");
+                innerHtml.Append("          </div>");
                 //Answer comments
                 if (answer.Comments.Count > 0)
                 {
-                    innerHtml.Append("<div class='answer-comments-wrap'>");
-                    innerHtml.Append("  <span>Comments:</span><hr />");
+                    innerHtml.Append("      <div class='answer-comments-wrap'>");
+                    innerHtml.Append("          <span>Comments:</span><hr />");
                     foreach (Students_Study_Groups.Classes.AnswerModel.Comment c in answer.Comments)
                     {
-                        innerHtml.Append("<div class='comment'>");
-                        innerHtml.Append("  <span>" + c.Text + "</span>");
-                        innerHtml.Append("  <span>--</span><a href='#'>" + c.Username + "</a>");
-                        innerHtml.Append("</div>");
+                        innerHtml.Append("      <div class='comment'>");
+                        innerHtml.Append("          <span>" + c.Text + "</span>");
+                        innerHtml.Append("          <span>--</span><a href='Profile.aspx?UID="+ c.UID +"'>" + c.Username + "</a>");
+                        innerHtml.Append("      </div>");
                     }
-                    innerHtml.Append("</div>");
+                    innerHtml.Append("      </div>");
                 }
+                innerHtml.Append("      </div>");
+                innerHtml.Append("  </div>");
                 innerHtml.Append("</div>");
             }
 
+            
             AnswersContent.InnerHtml = innerHtml.ToString();
         }
 

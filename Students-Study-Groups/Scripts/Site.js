@@ -25,7 +25,10 @@
             var res = JSON.parse(result);
             if (res.status == "success") {
                 $('#dialog-overlay, #login-dialog').hide();
-                window.location.href = "Index.aspx";
+                if (window.location.href.indexOf("SignUp.aspx") > -1) {
+                    window.location.href = "Index.aspx";
+                }
+                else location.reload();
             }
             else if (res.status == "error") {
                 alert(res.message);
@@ -55,6 +58,6 @@ function logout() {
 
     service.LogoutUser(function (result) {
         alert(result);
-        window.location.href = "Index.aspx";
+        location.reload();
     });
 }
