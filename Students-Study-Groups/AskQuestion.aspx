@@ -5,7 +5,6 @@
     <link href="Styles/AskQuestion.css" type="text/css" rel="stylesheet" />
     <link href="Styles/tokens.css" type="text/css" rel="stylesheet" />
     <link href="Styles/wmd.css" type="text/css" rel="stylesheet" />
-    <link href="Styles/prettify.css" type="text/css" rel="stylesheet" />
     <script src='<%= ResolveUrl("~/Scripts/AskQuestion.js")%>' type="text/javascript"></script>
     <script src='<%= ResolveUrl("~/Scripts/showdown.js")%>' type="text/javascript"></script>
     <script src='<%= ResolveUrl("~/Scripts/wmd.js")%>' type="text/javascript"></script>

@@ -11,15 +11,16 @@ namespace Students_Study_Groups.Classes
     {
         public class Comment
         {
-            public int CID { get; set; }
-            public int UID { get; set; }
-            public string Text { get; set; }
+            public int CID              { get; set; }
+            public int UID              { get; set; }
+            public string Username      { get; set; }
+            public string Text          { get; set; }
             public string DateCommented { get; set; }
         }
 
         public int QID                   { get; set; }
         public int UID                   { get; set; }
-        public string Username { get; set; }
+        public string Username           { get; set; }
         public string Title              { get; set; }
         public int Views                 { get; set; }
         public int Votes                 { get; set; }
@@ -42,7 +43,6 @@ namespace Students_Study_Groups.Classes
                     SqlDataReader reader;
                     SqlCommand command = new SqlCommand();
                     command.Connection = conn;
-                    //command.CommandText = "SELECT * FROM Questions WHERE QID = @QID";
                     command.CommandText = "SELECT * FROM Questions INNER JOIN Users ON Questions.UID = Users.UID WHERE QID = @QID";
                     command.Parameters.AddWithValue("@QID", qid);
                     reader = command.ExecuteReader();
@@ -67,7 +67,7 @@ namespace Students_Study_Groups.Classes
                         reader.Close();
 
                         //Take all the question comments
-                        command.CommandText = "SELECT * FROM QuestionComments WHERE QID = @QID";
+                        command.CommandText = "SELECT qc.*, u.Username FROM QuestionComments as qc, Users as u WHERE qc.QID = @QID AND qc.UID = u.UID";
                         reader = command.ExecuteReader();
 
                         if (reader.HasRows)
@@ -79,6 +79,7 @@ namespace Students_Study_Groups.Classes
                                 c.UID           = Int32.Parse(reader["UID"].ToString());
                                 c.Text          = reader["Text"].ToString();
                                 c.DateCommented = reader["DateCommented"].ToString();
+                                c.Username      = reader["Username"].ToString();
                                 question.Comments.Add(c);
                             }
                         }

@@ -14,6 +14,7 @@ namespace Students_Study_Groups
     public partial class Question : System.Web.UI.Page
     {
         public int QID;
+        public int UID;
         public QuestionModel QuestionMod;
 
         protected void Page_Load(object sender, EventArgs e)
@@ -25,6 +26,11 @@ namespace Students_Study_Groups
             {
                 Response.Redirect("Error.aspx");
             }
+
+            if (HttpContext.Current.Session["User"] != null)
+            {
+                UID = Int32.Parse(HttpContext.Current.Session["UID"].ToString());
+            }
             
             if(!IsPostBack)
             { 
@@ -34,20 +40,96 @@ namespace Students_Study_Groups
                     Response.Redirect("Error.aspx");
                 }
 
-                /*
-                //Add the question text, tags and comments---------------------------- 
-                StringBuilder innerHtml = new StringBuilder();
-                innerHtml.Append(QuestionMod.Body);
-                innerHtml.Append("<div class='question-tags'>");
-                foreach (TagsModel Tag in QuestionMod.Tags)
-                {
-                    innerHtml.Append("<div class='tag'>" + Tag.Name + "</div>");
-                }
+                FillQuestionHtml();
 
-                QuestionBody.InnerHtml = innerHtml.ToString();
-                //--------------------------------------------------------------------
-                */
+                if (QuestionMod.Answers.Count > 0) 
+                    FillAnswersHtml();
             }
+        }
+
+        private void FillQuestionHtml()
+        {
+            StringBuilder innerHtml = new StringBuilder();
+
+            innerHtml.Append("<div class='body-content'>");
+            innerHtml.Append(QuestionMod.Body);
+            innerHtml.Append("  <div>");
+            innerHtml.Append("      <div class='question-tags'>");
+            foreach (TagsModel Tag in QuestionMod.Tags)
+            {
+                innerHtml.Append("      <div class='tag'><a href='#'>" + Tag.Name + "</a></div>");
+            }
+            innerHtml.Append("      </div>");
+            innerHtml.Append("      <div style='float:right;'>Asked by: " + QuestionMod.Username + "</div>");
+            innerHtml.Append("  </div>");
+            innerHtml.Append("</div>");
+            innerHtml.Append("<div class='question-comments'>");
+            innerHtml.Append("  <a href='javascript:void(0)' id='add_question_comment' class='button-comment float-left' style='margin-right: 10px;'>add comment</a>");
+            innerHtml.Append("  <div class='question-post-comment' style='display:none;'>");
+            innerHtml.Append("      <textarea id='ta_question_comment' class='textarea-input'></textarea>");
+            innerHtml.Append("      <a href='javascript:void(0)' id='post_question_comment' class='button-comment float-right' style='margin-right: 10px; width: 30px !important;'>post</a>");
+            innerHtml.Append("  </div>");
+            
+            //Question comments
+            if (QuestionMod.Comments.Count > 0)
+            {
+                innerHtml.Append("<div class='question-comments-wrap'>");
+                innerHtml.Append("  <span>Comments:</span><hr />");
+                foreach (Students_Study_Groups.Classes.QuestionModel.Comment c in QuestionMod.Comments)
+                {
+                    innerHtml.Append("<div class='comment'>");
+                    innerHtml.Append("  <span>" + c.Text + "</span>");
+                    innerHtml.Append("  <span>--</span><a href='#'>" + c.Username + "</a>");
+                    innerHtml.Append("</div>");
+                }
+                innerHtml.Append("</div>");
+            }
+            innerHtml.Append("</div>");
+
+            QuestionBody.InnerHtml = innerHtml.ToString();
+        }
+
+        private void FillAnswersHtml()
+        {
+            StringBuilder innerHtml = new StringBuilder();
+
+            innerHtml.Append("<div class='answers-header'>");
+            innerHtml.Append("  <h1>Answers</h1>");
+            innerHtml.Append("</div>");
+
+            foreach(AnswerModel answer in QuestionMod.Answers) 
+            {
+                innerHtml.Append("<div class='answer-content'>");
+                innerHtml.Append("  <div class='answer-votes'></div>");
+                innerHtml.Append("  <div class='answer-body'>");
+                innerHtml.Append("      <div class='body-content'>");
+                innerHtml.Append(answer.Body);
+                innerHtml.Append("          <div style='float:right;display:inline;'>Posted by: " + answer.Username + "</div>");
+                innerHtml.Append("      </div>");
+                innerHtml.Append("      <div class='answer-comments>'");
+                innerHtml.Append("  <a href='javascript:void(0)' id='add_answer_comment_"+ answer.UID + "' class='button-comment float-left' style='margin-right: 10px;'>add comment</a>");
+                innerHtml.Append("  <div class='answer-post-comment' style='display:none;'>");
+                innerHtml.Append("      <textarea id='ta_answer_comment_"+ answer.UID + "' class='textarea-input'></textarea>");
+                innerHtml.Append("      <a href='javascript:void(0)' id='post_answer_comment_" + answer.UID +"' class='button-comment float-right' style='margin-right: 10px; width: 30px !important;'>post</a>");
+                innerHtml.Append("  </div>");
+                //Answer comments
+                if (answer.Comments.Count > 0)
+                {
+                    innerHtml.Append("<div class='answer-comments-wrap'>");
+                    innerHtml.Append("  <span>Comments:</span><hr />");
+                    foreach (Students_Study_Groups.Classes.AnswerModel.Comment c in answer.Comments)
+                    {
+                        innerHtml.Append("<div class='comment'>");
+                        innerHtml.Append("  <span>" + c.Text + "</span>");
+                        innerHtml.Append("  <span>--</span><a href='#'>" + c.Username + "</a>");
+                        innerHtml.Append("</div>");
+                    }
+                    innerHtml.Append("</div>");
+                }
+                innerHtml.Append("</div>");
+            }
+
+            AnswersContent.InnerHtml = innerHtml.ToString();
         }
 
     }

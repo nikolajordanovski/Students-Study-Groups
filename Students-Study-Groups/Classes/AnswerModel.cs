@@ -11,14 +11,16 @@ namespace Students_Study_Groups.Classes
     {
         public class Comment
         {
-            public int CID { get; set; }
-            public int UID { get; set; }
-            public string Text { get; set; }
+            public int CID              { get; set; }
+            public int UID              { get; set; }
+            public string Username      { get; set; }
+            public string Text          { get; set; }
             public string DateCommented { get; set; }
         }
 
         public int AID                  { get; set; }
         public int UID                  { get; set; }
+        public string Username          { get; set; }
         public string Title             { get; set; }
         public int Correct              { get; set; }
         public int Votes                { get; set; }
@@ -44,7 +46,7 @@ namespace Students_Study_Groups.Classes
                     SqlCommand command = new SqlCommand();
                     command.Connection = conn;
 
-                    command.CommandText = "SELECT * FROM Answers WHERE AID = @AID";
+                    command.CommandText = "SELECT * FROM Answers INNER JOIN Users ON Answers.UID = Users.UID WHERE AID = @AID";
                     command.Parameters.AddWithValue("@AID", id);
                     reader = command.ExecuteReader();
 
@@ -59,11 +61,12 @@ namespace Students_Study_Groups.Classes
                             Title        = reader["Title"].ToString();
                             Body         = reader["Body"].ToString();
                             DateAnswered = reader["DateAnswered"].ToString();
+                            Username     = reader["Username"].ToString();
                         }
                     }
                     reader.Close();
 
-                    command.CommandText = "SELECT * FROM AnswerComments WHERE AID=@AID";
+                    command.CommandText = "SELECT ac.*, u.Username FROM AnswerComments as ac, Users as u WHERE ac.AID = @AID AND ac.UID = u.UID";
                     reader = command.ExecuteReader();
 
                     if (reader.HasRows)
@@ -75,7 +78,7 @@ namespace Students_Study_Groups.Classes
                             c.UID           = Int32.Parse(reader["UID"].ToString());
                             c.Text          = reader["Text"].ToString();
                             c.DateCommented = reader["DateCommented"].ToString();
-
+                            c.Username      = reader["Username"].ToString();
                             Comments.Add(c);
                         }
                     }

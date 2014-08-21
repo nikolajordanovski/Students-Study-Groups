@@ -219,7 +219,6 @@ first child of the left and right table columns */
     text-decoration: none;
     background: #00B88A;
     color: White;
-    width: 100px;
     padding: 5px 15px;
     border-radius: 10px;
 }
@@ -229,7 +228,6 @@ first child of the left and right table columns */
     text-decoration: none;
     background: #008161;
     color: White;
-    width: 100px;
     padding: 5px 15px;
     border-radius: 10px;
 }
@@ -312,4 +310,11 @@ tr.spaceUnder > td
 .float-right 
 {
     float:right;
+}
+
+.textarea-input 
+{
+    width: 300px;
+    height: 70px;
+    max-width: 300px;
 }

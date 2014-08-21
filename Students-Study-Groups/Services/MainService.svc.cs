@@ -164,5 +164,58 @@ namespace Students_Study_Groups.Services
             }
         }
 
+        [OperationContract]
+        public string PostQuestionComment(string postData)
+        {
+            Dictionary<string, object> jsonData = new JavaScriptSerializer().Deserialize<Dictionary<string, object>>(postData);
+            Dictionary<string, string> result = new Dictionary<string, string>();
+
+            using (SqlConnection conn = new SqlConnection())
+            {
+                conn.ConnectionString = ConfigurationManager.ConnectionStrings["SSG"].ConnectionString;
+                try
+                {
+                    conn.Open();
+                    SqlCommand command = new SqlCommand();
+                    SqlDataReader reader;
+                    command.Connection = conn;
+
+                    command.CommandText = "SELECT * FROM QuestionComments WHERE QID = @QID AND UID = @UID AND DateCommented = GETDATE()";
+                    command.Parameters.AddWithValue("@QID", jsonData["questionId"]);
+                    command.Parameters.AddWithValue("@UID", jsonData["userId"]);
+                    reader = command.ExecuteReader();
+                    if (reader.HasRows)
+                    {
+                        reader.Close();
+                        result["status"] = "error";
+                        result["message"] = "Please don't spam";
+                        return new JavaScriptSerializer().Serialize(result);
+                    }
+                    else
+                    {
+                        reader.Close();
+                        command.CommandText = "INSERT INTO QuestionComments (QID, UID, Text, DateCommented) VALUES (@QID, @UID, @Text, GETDATE());";
+                        command.Parameters.AddWithValue("@Text", jsonData["text"]);
+                        command.ExecuteNonQuery();
+
+                        result["status"] = "success";
+                        result["message"] = "";
+                        return new JavaScriptSerializer().Serialize(result);
+                    }
+                }
+                catch (Exception e)
+                {
+                    result["status"] = "error";
+                    result["message"] = e.Message;
+                    return new JavaScriptSerializer().Serialize(result);
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
+        }
+
+
     }
 }
