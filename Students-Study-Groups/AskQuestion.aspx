@@ -15,6 +15,11 @@
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+    <asp:HiddenField ID="hfTags" runat="server" Value="asd" />
+    <script type="text/javascript">
+        var tagsList = $("#<%=hfTags.ClientID %>").val();
+        var tagsList = tagsList.split(",");
+    </script>
     <div class="ask-question-container">
         <h1>Ask a question</h1>
         <hr />

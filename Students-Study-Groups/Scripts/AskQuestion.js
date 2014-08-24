@@ -1,6 +1,7 @@
 ﻿$(document).ready(function () {
-
+    
     $("#MainContent_tbTags").tokens({
+        source : tagsList,
         keyCode: {
             UP: 38,
             DOWN: 40,
