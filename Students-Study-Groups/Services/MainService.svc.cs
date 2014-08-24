@@ -155,13 +155,13 @@ namespace Students_Study_Groups.Services
                     //Insert the question id in SHasQ and increment questions in Subjects--------------
                     command.CommandText = "INSERT INTO SHasQ (SID, QID) VALUES (@SID, @QID)";
                     command.Parameters.Clear();
-                    command.Parameters.AddWithValue("@SID", jsonData["subjectId"]);
+                    command.Parameters.AddWithValue("@SID", jsonData["SID"]);
                     command.Parameters.AddWithValue("@QID", QID);
                     command.ExecuteNonQuery();
 
                     command.CommandText = "UPDATE Subjects SET Questions = Questions + 1 WHERE SID = @SID";
                     command.Parameters.Clear();
-                    command.Parameters.AddWithValue("@TID", jsonData["subjectId"]);
+                    command.Parameters.AddWithValue("@SID", jsonData["SID"]);
                     command.ExecuteNonQuery();
                     //---------------------------------------------------------------------------------
 

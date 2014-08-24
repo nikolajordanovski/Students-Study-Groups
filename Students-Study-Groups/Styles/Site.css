@@ -369,3 +369,9 @@ tr.spaceUnder > td
     height: 70px;
     max-width: 300px;
 }
+
+.dropdown-input 
+{
+    padding:5px;
+    border-radius: 8px;
+}

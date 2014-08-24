@@ -33,11 +33,11 @@
         <!-- QUESTION -->
         <div class="question-content">
             <div class="question-votes">
-                <asp:ImageButton ID="imgUpvote" ImageUrl="~/Images/upvote-arrow.png" runat="server" />
+                <a href="javascript:void(0)" id="upvote-question"><img src="Images/upvote-arrow.png" /></a> 
                 <div class="votes">
-                    <asp:Label ID="lblVotes" runat="server" Text="2"></asp:Label>
+                    <span>2</span>
                 </div>
-                <asp:ImageButton ID="ImageButton1" ImageUrl="~/Images/downvote-arrow.png" runat="server" />
+                <a href="javascript:void(0)" id="downvote-question"><img src="Images/downvote-arrow.png" /></a> 
             </div>
             <div class="question-body" runat="server" id="QuestionBody"></div>
         </div>

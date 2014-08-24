@@ -31,6 +31,33 @@ namespace Students_Study_Groups {
         protected global::System.Web.UI.WebControls.Label lblError;
         
         /// <summary>
+        /// lblSubjects control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblSubjects;
+        
+        /// <summary>
+        /// ddlSubjects control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlSubjects;
+        
+        /// <summary>
+        /// rfvSubjects control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvSubjects;
+        
+        /// <summary>
         /// tbTitle control.
         /// </summary>
         /// <remarks>

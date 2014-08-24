@@ -20,15 +20,16 @@
                     
                     if(userId != 0) {
                         var titlestr = $("#MainContent_tbTitle").val();
-                        var bodystr = $("#wmd-preview").html();
+                        var bodystr  = $("#wmd-preview").html();
                         var tagsList = $("#MainContent_tbTags").val().split(",");
-                    
+                        var subjectId  = $("#MainContent_ddlSubjects option:selected").val();
+
                         var questionData = {
-                            title : titlestr,
-                            body : bodystr,
-                            tags : tagsList,
-                            UID : userId,
-                            SID : subjectId
+                            title   : titlestr,
+                            body    : bodystr,
+                            tags    : tagsList,
+                            UID     : userId,
+                            SID     : subjectId,
                         }
 
                         var service = new Students_Study_Groups.MainService();

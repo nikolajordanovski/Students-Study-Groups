@@ -11,7 +11,6 @@
     <script src='<%= ResolveUrl("~/Scripts/tokens.min.js")%>' type="text/javascript"></script>
     <script type="text/javascript">
         var userId    = <%=UID %>;
-        var subjectId = <%=SID %>;
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -24,6 +23,11 @@
         <h1>Ask a question</h1>
         <hr />
         <asp:Label ID="lblError" runat="server" Visible="false"></asp:Label>
+        <asp:Label ID="lblSubjects" runat="server" Text="Subjects:"></asp:Label>
+        <br />
+        <asp:DropDownList ID="ddlSubjects" CssClass="dropdown-input subjects" runat="server">
+        </asp:DropDownList>
+        <asp:RequiredFieldValidator ID="rfvSubjects" ControlToValidate="ddlSubjects" runat="server" ErrorMessage="You must choose a subject."></asp:RequiredFieldValidator>
         <asp:TextBox ID="tbTitle" placeholder="Title" CssClass="text-input" Style="width: 480px !important;
             margin-bottom: 10px;" runat="server"></asp:TextBox>
         <asp:RequiredFieldValidator ID="rfvTitle" ControlToValidate="tbTitle" runat="server"

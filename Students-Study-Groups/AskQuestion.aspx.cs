@@ -6,24 +6,16 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data.SqlClient;
 using System.Configuration;
+using System.Data;
 
 namespace Students_Study_Groups
 {
     public partial class AskQuestion : System.Web.UI.Page
     {
         public int UID;
-        public int SID;
-        
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            string id = Request.QueryString["SID"];
-
-            //Show error page if the query string is empty or not integer
-            if (string.IsNullOrEmpty(id) || !Int32.TryParse(id, out SID))
-            {
-                Response.Redirect("Error.aspx");
-            }
-
             if (HttpContext.Current.Session["User"] != null)
             {
                 UID = Int32.Parse(HttpContext.Current.Session["UID"].ToString());
@@ -32,6 +24,7 @@ namespace Students_Study_Groups
             if (!IsPostBack)
             {
                 FillTagsList();
+                FillSubjectsList();
             }
         }
 
@@ -57,6 +50,41 @@ namespace Students_Study_Groups
                         hfTags.Value += "," + reader["Name"].ToString();
                     }
                     reader.Close();
+                }
+                catch (Exception e)
+                {
+                    lblError.Text = e.Message;
+                    lblError.Visible = true;
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
+        }
+
+        private void FillSubjectsList()
+        {
+            using (SqlConnection conn = new SqlConnection())
+            {
+                conn.ConnectionString = ConfigurationManager.ConnectionStrings["SSG"].ConnectionString;
+                try
+                {
+                    conn.Open();
+                    SqlDataAdapter adapter = new SqlDataAdapter();
+                    SqlCommand command = new SqlCommand();
+                    DataSet ds = new DataSet();
+
+                    command.Connection = conn;
+                    command.CommandText = "SELECT * FROM Subjects";
+
+                    adapter.SelectCommand = command;
+                    adapter.Fill(ds, "Subjects");
+
+                    ddlSubjects.DataSource = ds.Tables["Subjects"];
+                    ddlSubjects.DataTextField = "Name";
+                    ddlSubjects.DataValueField = "SID";
+                    ddlSubjects.DataBind();
                 }
                 catch (Exception e)
                 {
