@@ -17,7 +17,7 @@
         </div>
         <div class="askquestion">
             <ul class="ul-nav-bottom">
-                <li><a href="AskQuestion.aspx">Ask question</a></li>
+                <li><a href="AskQuestion.aspx?SID=<%=Request.QueryString["SID"]%>">Ask question</a></li>
             </ul>
         </div>
     </div>
