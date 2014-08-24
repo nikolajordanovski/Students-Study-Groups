@@ -26,7 +26,8 @@
                             title : titlestr,
                             body : bodystr,
                             tags : tagsList,
-                            UID : userId
+                            UID : userId,
+                            SID : subjectId
                         }
 
                         var service = new Students_Study_Groups.MainService();

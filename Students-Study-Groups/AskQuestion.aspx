@@ -10,7 +10,8 @@
     <script src='<%= ResolveUrl("~/Scripts/wmd.js")%>' type="text/javascript"></script>
     <script src='<%= ResolveUrl("~/Scripts/tokens.min.js")%>' type="text/javascript"></script>
     <script type="text/javascript">
-        var userId = <%=UID %>;
+        var userId    = <%=UID %>;
+        var subjectId = <%=SID %>;
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
