@@ -49,12 +49,12 @@ namespace Students_Study_Groups {
         protected global::System.Web.UI.WebControls.LinkButton lbUnanswered;
         
         /// <summary>
-        /// questions control.
+        /// dvQuestions control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl questions;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl dvQuestions;
     }
 }

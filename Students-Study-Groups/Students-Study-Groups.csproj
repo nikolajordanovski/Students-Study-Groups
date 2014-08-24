@@ -108,8 +108,13 @@
     </Compile>
     <Compile Include="Classes\AnswerModel.cs" />
     <Compile Include="Classes\HtmlRemoval.cs" />
+    <Compile Include="Classes\Question.cs" />
     <Compile Include="Classes\QuestionModel.cs" />
-    <Compile Include="Classes\TagsModel.cs" />
+    <Compile Include="Classes\QuestionsModel.cs" />
+    <Compile Include="Classes\Subject.cs" />
+    <Compile Include="Classes\SubjectsModel.cs" />
+    <Compile Include="Classes\Tag.cs" />
+    <Compile Include="Classes\TagModel.cs" />
     <Compile Include="Error.aspx.cs">
       <DependentUpon>Error.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

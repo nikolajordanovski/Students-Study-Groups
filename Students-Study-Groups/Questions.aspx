@@ -22,7 +22,7 @@
             </ul>
         </div>
     </div>
-    <div ID="questions" class="questions" runat="server"></div>
+    <div ID="dvQuestions" class="questions" runat="server"></div>
     <div class="popularTags"></div>
 
 </asp:Content>

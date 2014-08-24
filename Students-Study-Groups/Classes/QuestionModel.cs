@@ -28,7 +28,7 @@ namespace Students_Study_Groups.Classes
         public string Body               { get; set; }
         public List<Comment> Comments    { get; set; }
         public List<AnswerModel> Answers { get; set; }
-        public List<TagsModel> Tags      { get; set; }
+        public List<TagModel> Tags      { get; set; }
 
         public static QuestionModel GetQuestionData(int qid) 
         {
@@ -52,7 +52,7 @@ namespace Students_Study_Groups.Classes
                         question = new QuestionModel();
                         question.Comments   = new List<Comment>();
                         question.Answers    = new List<AnswerModel>();
-                        question.Tags       = new List<TagsModel>();
+                        question.Tags       = new List<TagModel>();
                         
                         //Take the question data
                         reader.Read();
@@ -107,7 +107,7 @@ namespace Students_Study_Groups.Classes
                         {
                             while (reader.Read())
                             {
-                                TagsModel tag = new TagsModel(Int32.Parse(reader["TID"].ToString()));
+                                TagModel tag = new TagModel(Int32.Parse(reader["TID"].ToString()));
                                 question.Tags.Add(tag);
                             }
                         }

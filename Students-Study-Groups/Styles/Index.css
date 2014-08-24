@@ -14,21 +14,24 @@ div.subject:hover
 {
     cursor:pointer;
     background-color: #00B88A;
-    transition: background-color 1000ms linear;
+    transition: background-color 500ms linear;
 }
 
 .name
 {
-    font-size: 2em;
-    margin-bottom: 30px;
+    padding: 0px 5px 0px 5px;
+    font-size: 1.8em;
+    height: 60%;
 }
 
 .views
 {
     font-size: 1.6em;
+    height: 20%;
 }
 
 .questions
 {
     font-size: 1.6em;
+    height: 20%;
 }

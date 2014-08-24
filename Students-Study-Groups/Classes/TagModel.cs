@@ -7,13 +7,13 @@ using System.Configuration;
 
 namespace Students_Study_Groups.Classes
 {
-    public class TagsModel
+    public class TagModel
     {
         public int TID               { get; set; }
         public string Name           { get; set; }
         public int NumberOfQuestions { get; set; }
 
-        public TagsModel(int tid)
+        public TagModel(int tid)
         {
             TID = tid;
             GetTagsData(TID);

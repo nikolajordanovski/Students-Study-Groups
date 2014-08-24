@@ -55,7 +55,7 @@ namespace Students_Study_Groups
             innerHtml.Append(QuestionMod.Body);
             innerHtml.Append("  <div>");
             innerHtml.Append("      <div class='question-tags'>");
-            foreach (TagsModel Tag in QuestionMod.Tags)
+            foreach (TagModel Tag in QuestionMod.Tags)
             {
                 innerHtml.Append("      <div class='tag'><a href='#'>" + Tag.Name + "</a></div>");
             }

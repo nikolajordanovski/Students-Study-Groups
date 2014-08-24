@@ -6,36 +6,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 
-    <table>
-        <tr>
-            <td>
-                <div id="subject" class="subject">
-                    <div class="name">Probability and Statistics</div>
-                    <div class="views">231 views</div>
-                    <div class="questions">124 questions</div>
-                </div>
-            </td>
-            <td><div class="subject"></div></td>
-            <td><div class="subject"></div></td>
-            <td><div class="subject"></div></td>
-            <td><div class="subject"></div></td>
-            <td><div class="subject"></div></td>
-        </tr>
-        <tr>
-            <td><div class="subject"></div></td>
-            <td><div class="subject"></div></td>
-            <td><div class="subject"></div></td>
-            <td><div class="subject"></div></td>
-            <td><div class="subject"></div></td>
-            <td><div class="subject"></div></td>
-        </tr>
-        <tr>
-            <td><div class="subject"></div></td>
-            <td><div class="subject"></div></td>
-            <td><div class="subject"></div></td>
-            <td><div class="subject"></div></td>
-            <td><div class="subject"></div></td>
-            <td><div class="subject"></div></td>
-        </tr>
-    </table>
+    <asp:Table ID="tbSubjects" runat="server">
+    </asp:Table>
+
 </asp:Content>
