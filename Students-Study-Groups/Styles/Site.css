@@ -86,19 +86,15 @@ first child of the left and right table columns */
     height: 90px;
     top: 0;
     z-index: 100;
+    background: #00B88A;
 }
 
 .header-top 
 {
+    width: 1000px;
+    margin: 0px auto;
     height: 45px;
     background: #00B88A;
-}
-
-.logo 
-{
-    height: 45px;
-    padding-left: 50px;
-    vertical-align: middle;
 }
 
 .header-bottom 
@@ -124,6 +120,7 @@ first child of the left and right table columns */
 .login-menu 
 {
     height: 45px;
+    width: 10%;
     border-right: 2px solid #FFFFFF;
     border-left: 2px solid #FFFFFF;
     padding: 6px;
@@ -183,10 +180,64 @@ first child of the left and right table columns */
 /* FORM ELEMENTS   
 ----------------------------------------------------------*/
 
-.header-top .text-input 
+.logo
 {
-    margin-left:60px;
+    float: left;
+    width: 25%;
+    height: 100%;
 }
+
+.imglogo
+{
+    width: 100%;
+    height: 45px;
+    vertical-align: middle;
+}
+
+.search
+{
+    float: left;
+    width: 55%;
+    padding-top: 7px;
+    text-align: center;
+}
+
+.search .text-input 
+{
+    margin: 0px auto;
+    width: 80%;
+}
+
+.login
+{
+    float: left;
+    width: 8%;
+    padding-top: 6px;
+}
+
+.login a 
+{
+    text-align: center;
+    text-decoration: none;
+    color: #FFFFFF;
+    font-size: 22px;
+}
+
+.signup
+{
+    float: left;
+    width: 8%;
+    padding-top: 6px;
+}
+
+.signup a 
+{
+    text-align: center;
+    text-decoration: none;
+    color: #FFFFFF;
+    font-size: 22px;
+}
+
 .text-input 
 {
     padding: 6px;
