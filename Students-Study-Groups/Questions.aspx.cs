@@ -25,18 +25,25 @@ namespace Students_Study_Groups
 
         protected void pullQuestions()
         {
+            bool first = true;
             dvQuestions.InnerHtml = "";
             List<Classes.Question> questions = QuestionsModel.GetQuestionsData((string) Session["order"]);
-            foreach(Classes.Question question in questions)
-                dvQuestions.InnerHtml += generateDivQuestion(question.QID, question.UID, question.Username, question.Title, question.Body, question.Votes, question.Views, question.DateAsked, question.Answers, question.Tags);
+            foreach (Classes.Question question in questions)
+            {
+                dvQuestions.InnerHtml += generateDivQuestion(first, question.QID, question.UID, question.Username, question.Title, question.Body, question.Votes, question.Views, question.DateAsked, question.Answers, question.Tags);
+                first = false;
+            }
         }
 
-        protected string generateDivQuestion(int QID, int UID, string username, string title, string body, int votes, int views, string dateAsked, int answers, List<Tag> tags)
+        protected string generateDivQuestion(bool first, int QID, int UID, string username, string title, string body, int votes, int views, string dateAsked, int answers, List<Tag> tags)
         {
             StringBuilder questionDiv = new StringBuilder();
             string description = HtmlRemoval.StripTagsRegex(body);
-
-            questionDiv.Append("<div class='question'>");
+            
+            if(first)
+                questionDiv.Append("<div class='questionfirst'>");
+            else
+                questionDiv.Append("<div class='question'>");
             questionDiv.Append("<div class='left'>");
             questionDiv.Append("<table><tr><td>Votes:</td><td>" + votes + "</td></tr>");
             questionDiv.Append("<tr><td>Views:</td><td>" + views + "</td></tr>");
