@@ -6,6 +6,8 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 
+    <div class="subheader">Subjects</div>
+
     <asp:Table ID="tbSubjects" runat="server">
     </asp:Table>
 

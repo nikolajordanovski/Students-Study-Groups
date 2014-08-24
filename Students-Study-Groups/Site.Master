@@ -53,7 +53,7 @@
                     <li><a href="Index.aspx">Home</a></li>
                     <li><a href="AskQuestion.aspx">Ask question</a></li>
                     <li><a href="Questions.aspx">Questions</a></li>
-                    <li><a href="#">Profile</a></li>
+                    <li><a href="Profile.aspx?UID=<%=HttpContext.Current.Session["UID"]%>">Profile</a></li>
                     <li><a href="#">Users</a></li>
                 </ul>
             </div>
