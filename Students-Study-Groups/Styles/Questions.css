@@ -146,6 +146,8 @@ div.tag:hover
     background: #58C6AB
 }
 
+div.tag a { color: inherit; text-decoration: none;} 
+
 .profile
 {
     float:right;

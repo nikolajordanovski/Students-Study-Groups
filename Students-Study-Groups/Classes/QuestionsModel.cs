@@ -9,9 +9,18 @@ namespace Students_Study_Groups.Classes
 {
     public class QuestionsModel
     {
-        public static List<Question> GetQuestionsData(string orderBy)
+        public static List<Question> GetQuestionsData(string orderBy, int SID, int TID)
         {
             List<Question> questions = new List<Question>();
+            string whereClause = "";
+            if (SID != -1)
+                whereClause = "WHERE sq.SID = " + SID + " ";
+            if (TID != -1)
+                whereClause = "WHERE t.TID = " + TID + " ";
+            if (orderBy.Contains("ISNULL") && whereClause.Equals(""))
+                orderBy = "WHERE " + orderBy;
+            if (orderBy.Contains("ISNULL") && !whereClause.Equals(""))
+                orderBy = "AND " + orderBy;
 
             using (SqlConnection conn = new SqlConnection())
             {
@@ -29,8 +38,9 @@ namespace Students_Study_Groups.Classes
                                           "LEFT JOIN (SELECT QID, COUNT(AID) As Answers FROM Answers GROUP BY QID) a ON q.QID = a.QID " + 
                                           "INNER JOIN QHasT qt ON q.QID = qt.QID " +
                                           "INNER JOIN Tags t ON t.TID = qt.TID " +
-                                          orderBy;
-
+                                          "INNER JOIN SHasQ sq ON q.QID = sq.QID " +
+                                          whereClause + orderBy;
+                    
                     reader = command.ExecuteReader();
 
                     if (reader.HasRows)

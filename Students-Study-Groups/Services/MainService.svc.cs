@@ -147,6 +147,14 @@ namespace Students_Study_Groups.Services
                     }
                     //---------------------------------------------------------------------------------
 
+                    //Insert the question id in SHasQ--------------------------------------------------
+                    command.CommandText = "INSERT INTO SHasQ (SID, QID) VALUES (@SID, @QID)";
+                    command.Parameters.Clear();
+                    command.Parameters.AddWithValue("@SID", jsonData["subjectId"]);
+                    command.Parameters.AddWithValue("@QID", QID);
+                    command.ExecuteNonQuery();    
+                    //---------------------------------------------------------------------------------
+
                     result["status"] = "success";
                     result["QID"] = QID;
                     return new JavaScriptSerializer().Serialize(result);

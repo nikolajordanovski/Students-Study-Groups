@@ -14,20 +14,29 @@ namespace Students_Study_Groups
 {
     public partial class Questions : System.Web.UI.Page
     {
+        private int SID, TID;
+
         protected void Page_Load(object sender, EventArgs e)
         {
+            Session["order"] = "ORDER BY q.DateAsked DESC";
+            if (Request.QueryString["SID"] != null)
+                SID = Int32.Parse(Request.QueryString["SID"]);
+            else
+                SID = -1;
+            if (Request.QueryString["TID"] != null)
+                TID = Int32.Parse(Request.QueryString["TID"]);
+            else
+                TID = -1;
             if (!IsPostBack)
-            {
-                Session["order"] = "ORDER BY q.DateAsked DESC";
                 pullQuestions();
-            }
         }
 
         protected void pullQuestions()
         {
             bool first = true;
             dvQuestions.InnerHtml = "";
-            List<Classes.Question> questions = QuestionsModel.GetQuestionsData((string) Session["order"]);
+            
+            List<Classes.Question> questions = QuestionsModel.GetQuestionsData((string) Session["order"], SID, TID);
             foreach (Classes.Question question in questions)
             {
                 dvQuestions.InnerHtml += generateDivQuestion(first, question.QID, question.UID, question.Username, question.Title, question.Body, question.Votes, question.Views, question.DateAsked, question.Answers, question.Tags);
@@ -62,10 +71,10 @@ namespace Students_Study_Groups
             questionDiv.Append("<div class='about'>");
             questionDiv.Append("<div class='tags'>");
             foreach(Tag tag in tags)
-                questionDiv.Append("<div class='tag'>" + tag.Name.Trim() + "</div>");
+                questionDiv.Append("<div class='tag'><a href='Questions.aspx?TID=" + tag.TID + "'>" + tag.Name.Trim() + "</a></div>");
             questionDiv.Append("</div>");
             questionDiv.Append("<div class='profile'>");
-            questionDiv.Append("Asked by: <a href='Profile.aspx?UID=" + UID+ "'><b>" + username + "</b></a> on <b>" + DateTime.Parse(dateAsked).ToShortDateString() + "</b>");
+            questionDiv.Append("Asked by: <a href='Profile.aspx?UID=" + UID + "'><b>" + username + "</b></a> on <b>" + DateTime.Parse(dateAsked).ToShortDateString() + "</b>");
             questionDiv.Append("</div>");
             questionDiv.Append("</div>");
             questionDiv.Append("</div>");
@@ -94,7 +103,7 @@ namespace Students_Study_Groups
 
         protected void lbUnanswered_Click(object sender, EventArgs e)
         {
-            Session["order"] = "WHERE ISNULL(a.Answers, 0) = 0 ORDER BY q.DateAsked DESC";
+            Session["order"] = "ISNULL(a.Answers, 0) = 0 ORDER BY q.DateAsked DESC";
             pullQuestions();
         }
     }

@@ -167,3 +167,8 @@
     font-size: 24px;
     text-align:center;
 }
+
+.question-votes, .answer-votes 
+{
+    margin-top:15px;
+}
