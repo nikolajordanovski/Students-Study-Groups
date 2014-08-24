@@ -137,6 +137,11 @@ namespace Students_Study_Groups.Services
                             reader.Read();
                             TID = reader["TID"].ToString();
                             reader.Close();
+
+                            command.CommandText = "UPDATE Tags SET NumberOfQuestions = NumberOfQuestions + 1 WHERE TID = @TID";
+                            command.Parameters.Clear();
+                            command.Parameters.AddWithValue("@TID", TID);
+                            command.ExecuteNonQuery();
                         }
 
                         command.CommandText = "INSERT INTO QHasT (QID, TID) VALUES (@QID, @TID)";
@@ -147,12 +152,17 @@ namespace Students_Study_Groups.Services
                     }
                     //---------------------------------------------------------------------------------
 
-                    //Insert the question id in SHasQ--------------------------------------------------
+                    //Insert the question id in SHasQ and increment questions in Subjects--------------
                     command.CommandText = "INSERT INTO SHasQ (SID, QID) VALUES (@SID, @QID)";
                     command.Parameters.Clear();
                     command.Parameters.AddWithValue("@SID", jsonData["subjectId"]);
                     command.Parameters.AddWithValue("@QID", QID);
-                    command.ExecuteNonQuery();    
+                    command.ExecuteNonQuery();
+
+                    command.CommandText = "UPDATE Subjects SET Questions = Questions + 1 WHERE SID = @SID";
+                    command.Parameters.Clear();
+                    command.Parameters.AddWithValue("@TID", jsonData["subjectId"]);
+                    command.ExecuteNonQuery();
                     //---------------------------------------------------------------------------------
 
                     result["status"] = "success";
