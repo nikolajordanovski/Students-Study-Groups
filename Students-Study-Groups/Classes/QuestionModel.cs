@@ -18,17 +18,18 @@ namespace Students_Study_Groups.Classes
             public string DateCommented { get; set; }
         }
 
-        public int QID                   { get; set; }
-        public int UID                   { get; set; }
-        public string Username           { get; set; }
-        public string Title              { get; set; }
-        public int Views                 { get; set; }
-        public int Votes                 { get; set; }
-        public string DateAsked          { get; set; }
-        public string Body               { get; set; }
-        public List<Comment> Comments    { get; set; }
-        public List<AnswerModel> Answers { get; set; }
-        public List<TagModel> Tags      { get; set; }
+        public int QID                            { get; set; }
+        public int UID                            { get; set; }
+        public string Username                    { get; set; }
+        public string Title                       { get; set; }
+        public int Views                          { get; set; }
+        public int Votes                          { get; set; }
+        public string DateAsked                   { get; set; }
+        public string Body                        { get; set; }
+        public List<Comment> Comments             { get; set; }
+        public List<AnswerModel> Answers          { get; set; }
+        public List<TagModel> Tags                { get; set; }
+        public Dictionary<int, int> UsersVoted    { get; set; }
 
         public static QuestionModel GetQuestionData(int qid) 
         {
@@ -53,7 +54,7 @@ namespace Students_Study_Groups.Classes
                         question.Comments   = new List<Comment>();
                         question.Answers    = new List<AnswerModel>();
                         question.Tags       = new List<TagModel>();
-                        
+                        question.UsersVoted = new Dictionary<int, int>();
                         //Take the question data
                         reader.Read();
                         question.QID        = Int32.Parse(reader["QID"].ToString());
@@ -109,6 +110,19 @@ namespace Students_Study_Groups.Classes
                             {
                                 TagModel tag = new TagModel(Int32.Parse(reader["TID"].ToString()));
                                 question.Tags.Add(tag);
+                            }
+                        }
+                        reader.Close();
+
+                        //Take all the users that voted
+                        command.CommandText = "SELECT * FROM UVoteQ WHERE QID = @QID";
+                        reader = command.ExecuteReader();
+
+                        if (reader.HasRows)
+                        {
+                            while (reader.Read())
+                            {
+                                question.UsersVoted.Add(Int32.Parse(reader["UID"].ToString()), Int32.Parse(reader["Vote"].ToString()));
                             }
                         }
                         reader.Close();

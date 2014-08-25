@@ -333,5 +333,253 @@ namespace Students_Study_Groups.Services
                 }
             }
         }
+
+        [OperationContract]
+        public string UpvoteQuestion(int userId, int questionId)
+        {
+            Dictionary<string, string> result = new Dictionary<string, string>();
+            using (SqlConnection conn = new SqlConnection()) 
+            {
+                conn.ConnectionString = ConfigurationManager.ConnectionStrings["SSG"].ConnectionString;
+                try
+                {
+                    conn.Open();
+                    SqlCommand command = new SqlCommand();
+                    SqlDataReader reader;
+                    command.Connection = conn;
+
+                    command.CommandText = "SELECT * FROM UVoteQ WHERE UID = @UID AND QID = @QID";
+                    command.Parameters.AddWithValue("@UID", userId);
+                    command.Parameters.AddWithValue("@QID", questionId);
+                    reader = command.ExecuteReader();
+
+                    if (reader.HasRows)
+                    {
+                        reader.Read();
+                        if (reader["Vote"].ToString().Equals("1"))
+                        {
+                            result["status"] = "error";
+                            result["message"] = "You already upvoted this question.";
+                            return new JavaScriptSerializer().Serialize(result);
+                        }
+                        else
+                        {
+                            reader.Close();
+                            command.CommandText = "UPDATE UVoteQ SET Vote = 1 WHERE UID = @UID AND QID = @QID";
+                            command.ExecuteNonQuery();
+                        }
+                        reader.Close();
+                    }
+                    else
+                    {
+                        reader.Close();
+                        command.CommandText = "INSERT INTO UVoteQ (UID, QID, Vote) VALUES (@UID, @QID, 1);";
+                        command.ExecuteNonQuery();
+                    }
+
+                    command.CommandText = "UPDATE Questions SET Votes = Votes + 1 WHERE QID = @QID";
+                    command.ExecuteNonQuery();
+
+                    result["status"] = "success";
+                    return new JavaScriptSerializer().Serialize(result);
+                }
+                catch (Exception e)
+                {
+                    result["status"] = "error";
+                    result["message"] = e.Message;
+                    return new JavaScriptSerializer().Serialize(result);
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
+        }
+
+        [OperationContract]
+        public string DownvoteQuestion(int userId, int questionId)
+        {
+            Dictionary<string, string> result = new Dictionary<string, string>();
+            using (SqlConnection conn = new SqlConnection())
+            {
+                conn.ConnectionString = ConfigurationManager.ConnectionStrings["SSG"].ConnectionString;
+                try
+                {
+                    conn.Open();
+                    SqlCommand command = new SqlCommand();
+                    SqlDataReader reader;
+                    command.Connection = conn;
+
+                    command.CommandText = "SELECT * FROM UVoteQ WHERE UID = @UID AND QID = @QID";
+                    command.Parameters.AddWithValue("@UID", userId);
+                    command.Parameters.AddWithValue("@QID", questionId);
+                    reader = command.ExecuteReader();
+
+                    if (reader.HasRows)
+                    {
+                        reader.Read();
+                        if (reader["Vote"].ToString().Equals("-1"))
+                        {
+                            reader.Close();
+                            result["status"] = "error";
+                            result["message"] = "You already downvoted this question.";
+                            return new JavaScriptSerializer().Serialize(result);
+                        }
+                        else
+                        {
+                            reader.Close();
+                            command.CommandText = "UPDATE UVoteQ SET Vote = -1 WHERE UID = @UID AND QID = @QID";
+                            command.ExecuteNonQuery();
+                        }
+                    }
+                    else
+                    {
+                        reader.Close();
+                        command.CommandText = "INSERT INTO UVoteQ (UID, QID, Vote) VALUES (@UID, @QID, -1);";
+                        command.ExecuteNonQuery();
+                    }
+
+                    command.CommandText = "UPDATE Questions SET Votes = Votes - 1 WHERE QID = @QID";
+                    command.ExecuteNonQuery();
+
+                    result["status"] = "success";
+                    return new JavaScriptSerializer().Serialize(result);
+                }
+                catch (Exception e)
+                {
+                    result["status"] = "error";
+                    result["message"] = e.Message;
+                    return new JavaScriptSerializer().Serialize(result);
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
+        }
+
+        [OperationContract]
+        public string UpvoteAnswer(int userId, int answerId)
+        {
+            Dictionary<string, string> result = new Dictionary<string, string>();
+            using (SqlConnection conn = new SqlConnection())
+            {
+                conn.ConnectionString = ConfigurationManager.ConnectionStrings["SSG"].ConnectionString;
+                try
+                {
+                    conn.Open();
+                    SqlCommand command = new SqlCommand();
+                    SqlDataReader reader;
+                    command.Connection = conn;
+
+                    command.CommandText = "SELECT * FROM UVoteA WHERE UID = @UID AND AID = @AID";
+                    command.Parameters.AddWithValue("@UID", userId);
+                    command.Parameters.AddWithValue("@AID", answerId);
+                    reader = command.ExecuteReader();
+
+                    if (reader.HasRows)
+                    {
+                        reader.Read();
+                        if (reader["Vote"].ToString().Equals("1"))
+                        {
+                            result["status"] = "error";
+                            result["message"] = "You already upvoted this question.";
+                            return new JavaScriptSerializer().Serialize(result);
+                        }
+                        else
+                        {
+                            reader.Close();
+                            command.CommandText = "UPDATE UVoteA SET Vote = 1 WHERE UID = @UID AND AID = @AID";
+                            command.ExecuteNonQuery();
+                        }
+                        reader.Close();
+                    }
+                    else
+                    {
+                        reader.Close();
+                        command.CommandText = "INSERT INTO UVoteA (UID, AID, Vote) VALUES (@UID, @AID, 1);";
+                        command.ExecuteNonQuery();
+                    }
+
+                    command.CommandText = "UPDATE Answers SET Votes = Votes + 1 WHERE AID = @AID";
+                    command.ExecuteNonQuery();
+
+                    result["status"] = "success";
+                    return new JavaScriptSerializer().Serialize(result);
+                }
+                catch (Exception e)
+                {
+                    result["status"] = "error";
+                    result["message"] = e.Message;
+                    return new JavaScriptSerializer().Serialize(result);
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
+        }
+
+        [OperationContract]
+        public string DownvoteAnswer(int userId, int answerId)
+        {
+            Dictionary<string, string> result = new Dictionary<string, string>();
+            using (SqlConnection conn = new SqlConnection())
+            {
+                conn.ConnectionString = ConfigurationManager.ConnectionStrings["SSG"].ConnectionString;
+                try
+                {
+                    conn.Open();
+                    SqlCommand command = new SqlCommand();
+                    SqlDataReader reader;
+                    command.Connection = conn;
+
+                    command.CommandText = "SELECT * FROM UVoteA WHERE UID = @UID AND AID = @AID";
+                    command.Parameters.AddWithValue("@UID", userId);
+                    command.Parameters.AddWithValue("@AID", answerId);
+                    reader = command.ExecuteReader();
+
+                    if (reader.HasRows)
+                    {
+                        reader.Read();
+                        if (reader["Vote"].ToString().Equals("-1"))
+                        {
+                            reader.Close();
+                            result["status"] = "error";
+                            result["message"] = "You already downvoted this question.";
+                            return new JavaScriptSerializer().Serialize(result);
+                        }
+                        else
+                        {
+                            reader.Close();
+                            command.CommandText = "UPDATE UVoteA SET Vote = -1 WHERE UID = @UID AND AID = @AID";
+                            command.ExecuteNonQuery();
+                        }
+                    }
+                    else
+                    {
+                        reader.Close();
+                        command.CommandText = "INSERT INTO UVoteA (UID, AID, Vote) VALUES (@UID, @AID, -1);";
+                        command.ExecuteNonQuery();
+                    }
+
+                    command.CommandText = "UPDATE Answers SET Votes = Votes - 1 WHERE AID = @AID";
+                    command.ExecuteNonQuery();
+
+                    result["status"] = "success";
+                    return new JavaScriptSerializer().Serialize(result);
+                }
+                catch (Exception e)
+                {
+                    result["status"] = "error";
+                    result["message"] = e.Message;
+                    return new JavaScriptSerializer().Serialize(result);
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
+        }
     }
 }

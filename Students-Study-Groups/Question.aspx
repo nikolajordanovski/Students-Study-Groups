@@ -32,12 +32,7 @@
         </div>
         <!-- QUESTION -->
         <div class="question-content">
-            <div class="question-votes">
-                <a href="javascript:void(0)" id="upvote-question"><img src="Images/upvote-arrow.png" /></a> 
-                <div class="votes">
-                    <span>2</span>
-                </div>
-                <a href="javascript:void(0)" id="downvote-question"><img src="Images/downvote-arrow.png" /></a> 
+            <div class="question-votes" id="QuestionVotes" runat="server">
             </div>
             <div class="question-body" runat="server" id="QuestionBody"></div>
         </div>

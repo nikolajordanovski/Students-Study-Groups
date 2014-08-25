@@ -18,18 +18,20 @@ namespace Students_Study_Groups.Classes
             public string DateCommented { get; set; }
         }
 
-        public int AID                  { get; set; }
-        public int UID                  { get; set; }
-        public string Username          { get; set; }
-        public int Correct              { get; set; }
-        public int Votes                { get; set; }
-        public string DateAnswered      { get; set; }
-        public string Body              { get; set; }
-        public List<Comment> Comments   { get; set; }
-
+        public int AID                          { get; set; }
+        public int UID                          { get; set; }
+        public string Username                  { get; set; }
+        public int Correct                      { get; set; }
+        public int Votes                        { get; set; }
+        public string DateAnswered              { get; set; }
+        public string Body                      { get; set; }
+        public List<Comment> Comments           { get; set; }
+        public Dictionary<int, int> UsersVoted  { get; set; }
+        
         public AnswerModel(int id)
         {
-            Comments = new List<Comment>();
+            Comments   = new List<Comment>();
+            UsersVoted = new Dictionary<int, int>();
             GetAnswerData(id);
         }
 
@@ -78,6 +80,18 @@ namespace Students_Study_Groups.Classes
                             c.DateCommented = reader["DateCommented"].ToString();
                             c.Username      = reader["Username"].ToString();
                             Comments.Add(c);
+                        }
+                    }
+                    reader.Close();
+
+                    command.CommandText = "SELECT * FROM UVoteA WHERE AID = @AID";
+                    reader = command.ExecuteReader();
+
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            UsersVoted.Add(Int32.Parse(reader["UID"].ToString()), Int32.Parse(reader["Vote"].ToString()));
                         }
                     }
                     reader.Close();

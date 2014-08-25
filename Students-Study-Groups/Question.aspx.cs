@@ -87,6 +87,35 @@ namespace Students_Study_Groups
             innerHtml.Append("</div>");
 
             QuestionBody.InnerHtml = innerHtml.ToString();
+
+            //Question vote
+            innerHtml.Clear();
+            if (UID != 0 && QuestionMod.UsersVoted.Count > 0 && QuestionMod.UsersVoted.ContainsKey(UID))
+            {
+                if (QuestionMod.UsersVoted[UID] == 1)
+                    innerHtml.Append("<a href='javascript:void(0)' id='upvote-question'><img src='Images/upvote-arrow-voted.png' /></a>");
+                else
+                    innerHtml.Append("<a href='javascript:void(0)' id='upvote-question'><img src='Images/upvote-arrow.png' /></a>");
+
+                innerHtml.Append("<div class='votes'>");
+                innerHtml.Append("<span>" + QuestionMod.Votes + "</span>");
+                innerHtml.Append("</div>");
+
+                if (QuestionMod.UsersVoted[UID] == -1)
+                    innerHtml.Append("<a href='javascript:void(0)' id='downvote-question'><img src='Images/downvote-arrow-voted.png' /></a>");
+                else
+                    innerHtml.Append("<a href='javascript:void(0)' id='downvote-question'><img src='Images/downvote-arrow.png' /></a>");
+            }
+            else
+            {
+                innerHtml.Append("<a href='javascript:void(0)' id='upvote-question'><img src='Images/upvote-arrow.png' /></a>");
+                innerHtml.Append("<div class='votes'>");
+                innerHtml.Append("<span>" + QuestionMod.Votes + "</span>");
+                innerHtml.Append("</div>");
+                innerHtml.Append("<a href='javascript:void(0)' id='downvote-question'><img src='Images/downvote-arrow.png' /></a>");
+            }
+
+            QuestionVotes.InnerHtml = innerHtml.ToString();
         }
 
         private void FillAnswersHtml()
@@ -100,7 +129,33 @@ namespace Students_Study_Groups
             foreach(AnswerModel answer in QuestionMod.Answers) 
             {
                 innerHtml.Append("<div class='answer-content'>");
-                innerHtml.Append("  <div class='answer-votes'></div>");
+
+                innerHtml.Append("  <div class='answer-votes'>");
+                if (UID != 0 && answer.UsersVoted.Count > 0 && answer.UsersVoted.ContainsKey(UID))
+                {
+                    if (answer.UsersVoted[UID] == 1)
+                        innerHtml.Append("<a href='javascript:void(0)' id='upvote-answer-"+ answer.AID +"'><img src='Images/upvote-arrow-voted.png' /></a>");
+                    else
+                        innerHtml.Append("<a href='javascript:void(0)' id='upvote-answer-" + answer.AID + "'><img src='Images/upvote-arrow.png' /></a>");
+
+                    innerHtml.Append("  <div class='votes'>");
+                    innerHtml.Append("      <span>" + answer.Votes + "</span>");
+                    innerHtml.Append("  </div>");
+
+                    if (answer.UsersVoted[UID] == -1)
+                        innerHtml.Append("<a href='javascript:void(0)' id='downvote-answer-" + answer.AID + "'><img src='Images/downvote-arrow-voted.png' /></a>");
+                    else
+                        innerHtml.Append("<a href='javascript:void(0)' id='downvote-answer-" + answer.AID + "'><img src='Images/downvote-arrow.png' /></a>");
+                }
+                else
+                {
+                    innerHtml.Append("  <a href='javascript:void(0)' id='upvote-answer-" + answer.AID + "'><img src='Images/upvote-arrow.png' /></a>");
+                    innerHtml.Append("  <div class='votes'>");
+                    innerHtml.Append("      <span>" + answer.Votes + "</span>");
+                    innerHtml.Append("  </div>");
+                    innerHtml.Append("  <a href='javascript:void(0)' id='downvote-answer-" + answer.AID + "'><img src='Images/downvote-arrow.png' /></a>");
+                }
+                innerHtml.Append("  </div>");
                 innerHtml.Append("  <div class='answer-body'>");
                 innerHtml.Append("      <div class='body-content'>");
                 innerHtml.Append(answer.Body);
@@ -130,7 +185,6 @@ namespace Students_Study_Groups
                 innerHtml.Append("  </div>");
                 innerHtml.Append("</div>");
             }
-
             
             AnswersContent.InnerHtml = innerHtml.ToString();
         }

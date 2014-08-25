@@ -88,4 +88,74 @@
             });
         }
     });
+
+    $("#upvote-question").on("click", function () {
+        if (userId == 0)
+            popup();
+        else {
+            var service = new Students_Study_Groups.MainService();
+            service.UpvoteQuestion(userId, questionId, function (result) {
+                var res = JSON.parse(result);
+                if (res.status == "success") {
+                    window.location.href = "Question.aspx?QID=" + questionId;
+                }
+                else {
+                    alert(res.message);
+                }
+            });
+        }
+    });
+
+    $("#downvote-question").on("click", function () {
+        if (userId == 0)
+            popup();
+        else {
+            var service = new Students_Study_Groups.MainService();
+            service.DownvoteQuestion(userId, questionId, function (result) {
+                var res = JSON.parse(result);
+                if (res.status == "success") {
+                    window.location.href = "Question.aspx?QID=" + questionId;
+                }
+                else {
+                    alert(res.message);
+                }
+            });
+        }
+    });
+
+    $("a[id^=upvote-answer]").on("click", function () {
+        if (userId == 0)
+            popup();
+        else {
+            var answerId = $(this).attr("id").split("-");
+            var service = new Students_Study_Groups.MainService();
+            service.UpvoteAnswer(userId, answerId[2], function (result) {
+                var res = JSON.parse(result);
+                if (res.status == "success") {
+                    window.location.href = "Question.aspx?QID=" + questionId;
+                }
+                else {
+                    alert(res.message);
+                }
+            });
+        }
+    });
+
+    $("a[id^=downvote-answer]").on("click", function () {
+        if (userId == 0)
+            popup();
+        else {
+            var answerId = $(this).attr("id").split("-");
+            var service = new Students_Study_Groups.MainService();
+            service.DownvoteAnswer(userId, answerId[2], function (result) {
+                var res = JSON.parse(result);
+                if (res.status == "success") {
+                    window.location.href = "Question.aspx?QID=" + questionId;
+                }
+                else {
+                    alert(res.message);
+                }
+            });
+        }
+    });
 });
