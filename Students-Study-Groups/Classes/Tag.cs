@@ -9,5 +9,6 @@ namespace Students_Study_Groups.Classes
     {
         public int TID { get; set; }
         public string Name { get; set; }
+        public int NumberOfQuestions { get; set; }
     }
 }

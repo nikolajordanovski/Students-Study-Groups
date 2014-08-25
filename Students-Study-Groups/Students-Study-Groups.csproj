@@ -116,6 +116,7 @@
     <Compile Include="Classes\SubjectsModel.cs" />
     <Compile Include="Classes\Tag.cs" />
     <Compile Include="Classes\TagModel.cs" />
+    <Compile Include="Classes\TagsModel.cs" />
     <Compile Include="Classes\User.cs" />
     <Compile Include="Classes\UserModel.cs" />
     <Compile Include="Error.aspx.cs">

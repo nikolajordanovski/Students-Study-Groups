@@ -162,10 +162,22 @@ div.profile a:hover
     text-decoration: underline;
 }
 
-.popularTags 
+.popular 
 {
+    padding: 10px;
     float: right;
-    width: 23%; 
-    height: 600px;
+    width: 21%; 
     background: #F5D0A9;
+}
+
+.popularTags
+{
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.popularTags
+{
+    width: 100%;
+    margin-bottom: 10px;
 }

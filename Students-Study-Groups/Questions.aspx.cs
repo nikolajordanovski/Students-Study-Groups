@@ -33,7 +33,11 @@ namespace Students_Study_Groups
             else
                 title = null;
             if (!IsPostBack)
+            {
                 pullQuestions();
+                pullPopularTags();
+                pullPopularSubjects();
+            }
         }
 
         protected void pullQuestions()
@@ -86,6 +90,36 @@ namespace Students_Study_Groups
             questionDiv.Append("</div>");
 
             return questionDiv.ToString();
+        }
+
+        protected void pullPopularTags()
+        {
+            List<Tag> tags = TagsModel.GetTagsData();
+            StringBuilder tagsDiv = new StringBuilder();
+            tagsDiv.Append("Top 10 popular tags:");
+
+            foreach (Tag tag in tags)
+                tagsDiv.Append("<div class='tag' style='clear: left; display: block; margin-top: 5px;'><a href='Questions.aspx?TID=" + tag.TID + "'>" + tag.Name.Trim() + " x " + tag.NumberOfQuestions + "</a></div>");
+
+            dvPopularTags.InnerHtml = tagsDiv.ToString();
+        }
+
+        protected void pullPopularSubjects()
+        {
+            List<Subject> subjects = SubjectsModel.GetPopularSubjectsData();
+            StringBuilder subjectsDiv = new StringBuilder();
+            subjectsDiv.Append("Top 10 popular subjects:");
+
+            foreach (Subject subject in subjects)
+            {
+                string subjectName;
+                if (subject.Name.Length > 22)
+                    subjectName = subject.Name.Substring(0, 22) + "...";
+                else
+                    subjectName = subject.Name;
+                subjectsDiv.Append("<div class='tag' style='clear: left; display: block; margin-top: 5px;'><a href='Questions.aspx?SID=" + subject.SID + "'>" + subjectName + " x " + subject.Questions + "</a></div>");
+            }
+            dvPopularSubjects.InnerHtml = subjectsDiv.ToString();
         }
 
         protected void lbNewest_Click(object sender, EventArgs e)
