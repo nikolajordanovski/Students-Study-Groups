@@ -11,10 +11,28 @@ namespace Students_Study_Groups
 {
     public partial class Profile : System.Web.UI.Page
     {
+        public int UID;
+
         protected void Page_Load(object sender, EventArgs e)
         {
+            string id = Request.QueryString["UID"];
+
+            //Show error page if the query string is empty or not integer
+            if (string.IsNullOrEmpty(id) || !Int32.TryParse(id, out UID))
+            {
+                //Check if user is logged in
+                if (HttpContext.Current.Session["User"] != null)
+                {
+                    UID = Int32.Parse(HttpContext.Current.Session["UID"].ToString());
+                }
+                else
+                {
+                    ClientScript.RegisterStartupScript(GetType(), "Javascript", "javascript:popup(); ", true);
+                }
+            }
+
             if (!IsPostBack)
-                pullUserData(Int32.Parse(Request.QueryString["UID"]));
+                pullUserData(UID);
         }
 
         protected void pullUserData(int UID)

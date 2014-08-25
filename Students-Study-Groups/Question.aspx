@@ -32,9 +32,8 @@
         </div>
         <!-- QUESTION -->
         <div class="question-content">
-            <div class="question-votes" id="QuestionVotes" runat="server">
-            </div>
-            <div class="question-body" runat="server" id="QuestionBody"></div>
+            <div class="question-votes" id="QuestionVotes" runat="server"></div>
+            <div class="question-body" id="QuestionBody" runat="server" ></div>
         </div>
         <!-- ANSWERS -->
         <div class="answers-content" id="AnswersContent" runat="server"></div>

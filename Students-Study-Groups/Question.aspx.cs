@@ -27,6 +27,7 @@ namespace Students_Study_Groups
                 Response.Redirect("Error.aspx");
             }
 
+            //Check if user is logged in
             if (HttpContext.Current.Session["User"] != null)
             {
                 UID = Int32.Parse(HttpContext.Current.Session["UID"].ToString());
@@ -40,10 +41,44 @@ namespace Students_Study_Groups
                     Response.Redirect("Error.aspx");
                 }
 
+                CheckUserViews();
+
                 FillQuestionHtml();
 
                 if (QuestionMod.Answers.Count > 0) 
                     FillAnswersHtml();
+            }
+        }
+
+        private void CheckUserViews()
+        {
+            if (Request.Cookies["viewsInfo"] == null)
+            {
+                Response.Cookies["viewsInfo"]["idsList"] = QID.ToString();
+                Response.Cookies["viewsInfo"].Expires = DateTime.Now.AddMonths(2);
+                
+                UpdateQuestionViews();
+            }
+            else
+            {
+                string[] idsList = Request.Cookies["viewsInfo"]["idsList"].Split(',');
+                bool viewed = false;
+                foreach (string id in idsList)
+                {
+                    if (QID.ToString().Equals(id))
+                    {
+                        viewed = true;
+                        break;
+                    }
+                }
+
+                if (!viewed)
+                {
+                    string ids = Request.Cookies["viewsInfo"]["idsList"];
+                    ids += ("," + QID.ToString());
+                    Response.Cookies["viewsInfo"]["idsList"] = ids;
+                    UpdateQuestionViews();
+                }
             }
         }
 
@@ -187,6 +222,28 @@ namespace Students_Study_Groups
             }
             
             AnswersContent.InnerHtml = innerHtml.ToString();
+        }
+
+        private void UpdateQuestionViews()
+        {
+            using (SqlConnection conn = new SqlConnection())
+            {
+                conn.ConnectionString = ConfigurationManager.ConnectionStrings["SSG"].ConnectionString;
+                try
+                {
+                    conn.Open();
+                    SqlCommand command = new SqlCommand();
+                    command.Connection = conn;
+
+                    command.CommandText = "UPDATE Questions SET Views = Views + 1 WHERE QID = @QID";
+                    command.Parameters.AddWithValue("@QID", QID);
+                    command.ExecuteNonQuery();
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
         }
 
     }

@@ -1,6 +1,9 @@
 ﻿$(document).ready(function () {
 
     $("#lbCancel").click(function () {
+        if (window.location.href.indexOf("Profile.aspx") > -1) {
+            window.location.href = "Index.aspx";
+        }
         $('#dialog-overlay, #login-dialog').hide();
         return false;
     });
