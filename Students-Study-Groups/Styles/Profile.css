@@ -1,2 +1,82 @@
-﻿body {
+﻿.infoline
+{
+    width: 100%;
+    margin-bottom: 5px;
+    border-bottom: 2px solid #00B88A;
+    font-size: 2em;
+}
+
+.info
+{
+    margin-bottom: 20px;
+    font-size: 1.6em;
+}
+
+.questionsline
+{
+    width: 100%;
+    margin-bottom: 5px;
+    border-bottom: 2px solid #00B88A;
+    font-size: 2em;
+}
+
+.questions
+{
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.question
+{
+    width: 100%;
+    height: 30px;
+    margin-bottom: 5px;
+}
+
+.votes
+{
+    float: left;
+    width: 5%;
+    height: 100%;
+    font-size: 1.7em;
+    text-align: center;
+}
+
+.title
+{
+    float: left;
+    width: 75%;
+    height: 100%;
+    font-size: 1.6em;
+}
+
+div.title a { color: inherit; text-decoration: none;} 
+
+div.title a:hover  
+{
+    cursor:pointer;
+    text-decoration: underline;
+}
+
+.date
+{
+    float: left;
+    width: 20%;
+    height: 100%;
+    font-size: 1.6em;
+    text-align: center;
+}
+
+.answersline
+{
+    width: 100%;
+    margin-bottom: 5px;
+    border-bottom: 2px solid #00B88A;
+    font-size: 2em;
+}
+
+.answers
+{
+    width: 100%;
+    margin-bottom: 20px;
 }

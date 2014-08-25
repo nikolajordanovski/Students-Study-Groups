@@ -106,6 +106,7 @@
     <Compile Include="AskQuestion.aspx.designer.cs">
       <DependentUpon>AskQuestion.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Classes\Answer.cs" />
     <Compile Include="Classes\AnswerModel.cs" />
     <Compile Include="Classes\HtmlRemoval.cs" />
     <Compile Include="Classes\Question.cs" />
@@ -115,6 +116,8 @@
     <Compile Include="Classes\SubjectsModel.cs" />
     <Compile Include="Classes\Tag.cs" />
     <Compile Include="Classes\TagModel.cs" />
+    <Compile Include="Classes\User.cs" />
+    <Compile Include="Classes\UserModel.cs" />
     <Compile Include="Error.aspx.cs">
       <DependentUpon>Error.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -186,7 +189,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>49603</DevelopmentServerPort>
+          <DevelopmentServerPort>49205</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>
