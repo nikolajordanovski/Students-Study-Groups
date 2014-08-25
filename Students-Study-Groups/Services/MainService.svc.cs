@@ -129,7 +129,7 @@ namespace Students_Study_Groups.Services
                         {
                             reader.Close();
                             command.CommandText = "INSERT INTO Tags (Name, NumberOfQuestions) " +
-                                                  "VALUES (@Name, 0); SELECT SCOPE_IDENTITY();";
+                                                  "VALUES (@Name, 1); SELECT SCOPE_IDENTITY();";
                             TID = command.ExecuteScalar().ToString();
                         }
                         else
