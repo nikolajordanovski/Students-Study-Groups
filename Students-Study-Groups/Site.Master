@@ -44,7 +44,8 @@
         <div class="header">
             <div class="header-top">
                 <div class="logo"><a href="Index.aspx"><asp:Image ID="imgLogo" CssClass="imglogo" ImageUrl="~/Images/ssg-logo.png" runat="server" /></a></div>
-                <div class="search"><asp:TextBox ID="tbSearch" CssClass="text-input" placeholder="Search.." runat="server"></asp:TextBox></div>
+                <div class="search"><asp:TextBox ID="tbSearch" CssClass="text-input" AutoPostBack="True"
+                        placeholder="Search.." runat="server" ontextchanged="tbSearch_TextChanged"></asp:TextBox></div>
                 <div class="login"><a href="javascript:popup()" id="login" runat="server">Login</a></div>
                 <div class="signup"><a href="SignUp.aspx" id="signup" runat="server">Sign up</a></div>
             </div>

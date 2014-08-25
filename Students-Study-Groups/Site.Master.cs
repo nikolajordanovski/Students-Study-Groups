@@ -19,5 +19,11 @@ namespace Students_Study_Groups
                 login.HRef = "javascript:logout();";
             }
         }
+
+        protected void tbSearch_TextChanged(object sender, EventArgs e)
+        {
+            string title = tbSearch.Text;
+            Response.Redirect("Questions.aspx?Title=" + title);
+        }
     }
 }

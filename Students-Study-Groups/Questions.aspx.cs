@@ -15,6 +15,7 @@ namespace Students_Study_Groups
     public partial class Questions : System.Web.UI.Page
     {
         private int SID, TID;
+        private string title;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -27,6 +28,10 @@ namespace Students_Study_Groups
                 TID = Int32.Parse(Request.QueryString["TID"]);
             else
                 TID = -1;
+            if (Request.QueryString["Title"] != null)
+                title = Request.QueryString["Title"];
+            else
+                title = null;
             if (!IsPostBack)
                 pullQuestions();
         }
@@ -36,7 +41,7 @@ namespace Students_Study_Groups
             bool first = true;
             dvQuestions.InnerHtml = "";
             
-            List<Classes.Question> questions = QuestionsModel.GetQuestionsData((string) Session["order"], SID, TID);
+            List<Classes.Question> questions = QuestionsModel.GetQuestionsData((string) Session["order"], SID, TID, title);
             foreach (Classes.Question question in questions)
             {
                 dvQuestions.InnerHtml += generateDivQuestion(first, question.QID, question.UID, question.Username, question.Title, question.Body, question.Votes, question.Views, question.DateAsked, question.Answers, question.Tags);

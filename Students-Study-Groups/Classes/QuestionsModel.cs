@@ -9,7 +9,7 @@ namespace Students_Study_Groups.Classes
 {
     public class QuestionsModel
     {
-        public static List<Question> GetQuestionsData(string orderBy, int SID, int TID)
+        public static List<Question> GetQuestionsData(string orderBy, int SID, int TID, string title)
         {
             List<Question> questions = new List<Question>();
             string whereClause = "";
@@ -17,6 +17,8 @@ namespace Students_Study_Groups.Classes
                 whereClause = "WHERE sq.SID = " + SID + " ";
             if (TID != -1)
                 whereClause = "WHERE t.TID = " + TID + " ";
+            if (title != null)
+                whereClause = "WHERE q.Title LIKE '%" + title + "%' ";
             if (orderBy.Contains("ISNULL") && whereClause.Equals(""))
                 orderBy = "WHERE " + orderBy;
             if (orderBy.Contains("ISNULL") && !whereClause.Equals(""))

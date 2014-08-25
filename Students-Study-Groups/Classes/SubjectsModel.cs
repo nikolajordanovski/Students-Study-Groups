@@ -23,7 +23,10 @@ namespace Students_Study_Groups.Classes
                     SqlCommand command = new SqlCommand();
                     command.Connection = conn;
 
-                    command.CommandText = "SELECT * FROM Subjects";
+                    command.CommandText = "SELECT s.SID, s.Name, s.Questions, ISNULL(v.Views, 0) as 'Views', s.Users, s.Description " +
+                                          "FROM Subjects s " +
+                                          "LEFT JOIN (SELECT sq.SID, SUM(q.Views) as 'Views' FROM SHasQ sq " +
+                                          "INNER JOIN Questions q ON sq.QID = q.QID GROUP BY sq.SID) v ON s.SID = v.SID";
                     reader = command.ExecuteReader();
 
                     if (reader.HasRows)
